@@ -7,44 +7,99 @@
 </head>
 <body>
     <h1>Адміністративна панель</h1>
-    <p>Керування користувачами та фінансами.</p>
+    <p>Перегляд статистики</p>
 
-    <h2>Список користувачів</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Ім'я</th>
-            <th>Баланс</th>
-            <th>Дії</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Іван Іваненко</td>
-            <td>10,000 грн</td>
-            <td><a href="#">Редагувати</a> | <a href="#">Видалити</a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Марія Петрівна</td>
-            <td>5,500 грн</td>
-            <td><a href="#">Редагувати</a> | <a href="#">Видалити</a></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Петро Іванов</td>
-            <td>7,000 грн</td>
-            <td><a href="#">Редагувати</a> | <a href="#">Видалити</a></td>
-        <tfoot>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Адміністративна панель</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="admin-users.html">Управління користувачами</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="admin-mainpage.html">Управління контентом</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h4>Іван Іваненко</h4>
+    <table border="1" id="ivan-ivanenko">
+        <thead>
             <tr>
-                <th colspan="4">
-                Кількість користувачів
-                </th>
-                <th colspan="2">4</th>
+                <th>ID</th>
+                <th>Операція</th>
+                <th>Сума</th>
+                <th>Остаточна сума</th>
+                <th>Дата</th>
             </tr>
-        </tfoot>
-
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Переказ</td>
+                <td>-500 грн</td>
+                <td>9,500 грн</td>
+                <td>03.03.2025</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Переказ</td>
+                <td>-500 грн</td>
+                <td>9,500 грн</td>
+                <td>03.03.2025</td>
+            </tr>
+        </tbody>
     </table>
 
+    <h4>Марія Петрівна</h4>
+    <table border="1" id="maria-petrivna">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Операція</th>
+                <th>Сума</th>
+                <th>Остаточна сума</th>
+                <th>Дата</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Переказ</td>
+                <td>-500 грн</td>
+                <td>9,000 грн</td>
+                <td>03.03.2025</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Петро Іванов</h4>
+
+    <table border="1" id="petro-ivanov">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Операція</th>
+                <th>Сума</th>
+                <th>Остаточна сума</th>
+                <th>Дата</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Переказ</td>
+                <td>-500 грн</td>
+                <td>6,500 грн</td>
+                <td>03.03.2025</td>
+            </tr>
+        </tbody>
+    </table>
 
     <a href="index.html">Вийти</a>
 </body>

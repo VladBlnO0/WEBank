@@ -7,44 +7,55 @@
 </head>
 <body>
     <h1>Адміністративна панель</h1>
-    <p>Керування користувачами та фінансами.</p>
+    <p>Управління контентом</p>
 
-    <h2>Список користувачів</h2>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Адміністративна панель</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="admin-stats.html">Перегляд статистики</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="admin-users.html">Список користувачів</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <table border="1">
         <tr>
             <th>ID</th>
             <th>Ім'я</th>
-            <th>Баланс</th>
             <th>Дії</th>
         </tr>
         <tr>
             <td>1</td>
-            <td>Іван Іваненко</td>
-            <td>10,000 грн</td>
-            <td><a href="#">Редагувати</a> | <a href="#">Видалити</a></td>
-        </tr>
+            <td>Перегляд свого рахунку</td>
+            <td><button type="submit">Редагувати</button> | <button type="submit">Видалити</button>
+            </tr>
         <tr>
             <td>2</td>
-            <td>Марія Петрівна</td>
-            <td>5,500 грн</td>
-            <td><a href="#">Редагувати</a> | <a href="#">Видалити</a></td>
+            <td>Переказ коштів на картку</td>
+            <td><button type="submit">Редагувати</button> | <button type="submit">Видалити</button>
         </tr>
         <tr>
             <td>3</td>
-            <td>Петро Іванов</td>
-            <td>7,000 грн</td>
-            <td><a href="#">Редагувати</a> | <a href="#">Видалити</a></td>
+            <td>Оплата послуг</td>
+            <td><button type="submit">Редагувати</button> | <button type="submit">Видалити</button>
         <tfoot>
             <tr>
-                <th colspan="4">
-                Кількість користувачів
+                <th colspan="3">
+                    <button type="submit">Додати</button>
                 </th>
-                <th colspan="2">4</th>
             </tr>
         </tfoot>
 
     </table>
-
 
     <a href="index.html">Вийти</a>
 </body>

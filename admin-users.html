@@ -7,7 +7,25 @@
 </head>
 <body>
     <h1>Адміністративна панель</h1>
-    <p>Керування користувачами та фінансами.</p>
+    <p>Керування користувачами</p>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="admin.html">Адміністративна панель</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="admin-stats.html">Перегляд статистики</a></li>
+            </ul>
+        </nav>
+        <nav>
+            <ul>
+                <li><a href="admin-mainpage.html">Управління контентом</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <h2>Список користувачів</h2>
     <table border="1">
@@ -15,36 +33,31 @@
             <th>ID</th>
             <th>Ім'я</th>
             <th>Баланс</th>
+            <th>Операції</th>
             <th>Дії</th>
         </tr>
         <tr>
             <td>1</td>
             <td>Іван Іваненко</td>
             <td>10,000 грн</td>
-            <td><a href="#">Редагувати</a> | <a href="#">Видалити</a></td>
+            <td><a href="admin-stats.html#ivan-ivanenko">Операції</a></td>
+            <td><button type="submit">Повідомити</button></td>
         </tr>
         <tr>
             <td>2</td>
             <td>Марія Петрівна</td>
             <td>5,500 грн</td>
-            <td><a href="#">Редагувати</a> | <a href="#">Видалити</a></td>
+            <td><a href="admin-stats.html#maria-petrivna">Операції</a></td>
+            <td><button type="submit">Повідомити</button></td>
         </tr>
         <tr>
             <td>3</td>
             <td>Петро Іванов</td>
             <td>7,000 грн</td>
-            <td><a href="#">Редагувати</a> | <a href="#">Видалити</a></td>
-        <tfoot>
-            <tr>
-                <th colspan="4">
-                Кількість користувачів
-                </th>
-                <th colspan="2">4</th>
-            </tr>
-        </tfoot>
-
+            <td><a href="admin-stats.html#petro-ivanov">Операції</a></td>
+            <td><button type="submit">Повідомити</button></td>
+        </tr>
     </table>
-
 
     <a href="index.html">Вийти</a>
 </body>

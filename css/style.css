@@ -1,0 +1,12 @@
+h1 {
+    color: red;
+    padding: 10px;
+    font-size: 64px;
+    border: 1px solid black;
+}
+
+body {
+    background-image: url("img/index-back.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

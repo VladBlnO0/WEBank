@@ -15,10 +15,9 @@ body {
     align-items: center;
 }
 
-/* 🔹 Admin Container */
 .admin-container {
         background: var(--color-container-background);
-        padding: 200px;
+        padding: 100px;
         width: 50%;
         border-radius: 35px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -27,7 +26,6 @@ body {
         flex: 1;
 }
 
-/* 🔹 Typography */
 h1 {
     font-size: 36px;
     font-weight: 700;
@@ -37,34 +35,40 @@ p {
     font-size: 18px;
 }
 
-/* 🔹 Navigation */
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
+.buttons {
+    margin-top: 20px;
 
-nav ul li {
-    margin: 10px 0;
-}
+    display: flex;
 
-.admin-link {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.btn {
     display: inline-block;
-    width: 220px;
-    padding: 12px;
-    background: var(--color-button);
+    padding: 12px 24px;
+    margin: 0;
     color: var(--color-white);
+    background: var(--color-button);
     text-decoration: none;
     font-weight: bold;
     border-radius: 8px;
-    transition: 0.3s;
+    transition: 0.3s ease;
+
+    width: 200px;
+
+}
+.btn:hover {
+    background: var(--color-button-hoover);
 }
 
-.admin-link:hover {
-    background: var(--color-button-hover);
-}
-
-/* 🔹 Exit Button */
 .logout {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
     display: inline-block;
     padding: 12px 24px;
     background: var(--color-red);

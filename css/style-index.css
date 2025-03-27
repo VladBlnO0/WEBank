@@ -18,14 +18,13 @@ body {
 
 .container {
     background: var(--color-container-background);
-    padding: 200px;
+    padding: 100px;
     width: 50%;
     border-radius: 35px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(100px);
 
     flex: 1;
-
 }
 
 h1 {

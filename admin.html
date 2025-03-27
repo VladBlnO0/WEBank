@@ -3,32 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Адміністративна панель</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="css/style-admin.css" rel="stylesheet">
+    <link href="css/cool-balls.css" rel="stylesheet">
+
 </head>
 <body>
-    <h1>Адміністративна панель</h1>
-    <p>Керування користувачами та фінансами</p>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="admin-stats.html">Перегляд статистики</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul>
-                <li><a href="admin-users.html">Управління користувачами</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul>
-                <li><a href="admin-mainpage.html">Управління контентом</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="exit">
-        <h3><a href="index.html">Вийти</a></h3>
-    </section>
+    <div class="admin-container">
+        <h1>Адміністративна панель</h1>
+        <p>Керування користувачами та фінансами</p>
+        <div class="newtons-cradle">
+            <div class="newtons-cradle__dot"></div>
+            <div class="newtons-cradle__dot"></div>
+            <div class="newtons-cradle__dot"></div>
+            <div class="newtons-cradle__dot"></div>
+        </div>
+
+        <!-- Navigation -->
+        <nav>
+            <ul>
+                <li><a href="admin-stats.html" class="admin-link">📊 Перегляд статистики</a></li>
+                <li><a href="admin-users.html" class="admin-link">👥 Управління користувачами</a></li>
+                <li><a href="admin-mainpage.html" class="admin-link">📝 Управління контентом</a></li>
+            </ul>
+        </nav>
+
+        <!-- Exit Button -->
+        <section id="exit">
+            <a href="index.html" class="btn logout">🚪 Вийти</a>
+        </section>
+
+    </div>
+
+
 
 </body>
 </html>

@@ -8,4 +8,12 @@
     --color-green: #5E865C;
     --color-gradient-start: #46a345b0;
     --color-gradient-end: #368335;
+    --color-red: #d9534f;
+    --color-red-hover: #c9302c;
+
+    --color-container-background: #cccee394;
+    --color-admin-gradient-start: #a6aeea2a;
+    --color-admin-gradient-end: #2c5bdb7e;
+
+
 }

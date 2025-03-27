@@ -16,7 +16,6 @@ body {
     align-items: center;
 }
 
-/* Контейнер */
 .container {
     background: var(--color-container-background);
     padding: 200px;

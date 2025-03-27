@@ -1,0 +1,80 @@
+@import url('palette.css');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(-180deg, var(--color-admin-gradient-start), var(--color-admin-gradient-end));
+    color: var(--color-text);
+    text-align: center;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 🔹 Admin Container */
+.admin-container {
+        background: var(--color-container-background);
+        padding: 200px;
+        width: 50%;
+        border-radius: 35px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(100px);
+
+        flex: 1;
+}
+
+/* 🔹 Typography */
+h1 {
+    font-size: 36px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 18px;
+}
+
+/* 🔹 Navigation */
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 10px 0;
+}
+
+.admin-link {
+    display: inline-block;
+    width: 220px;
+    padding: 12px;
+    background: var(--color-button);
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.admin-link:hover {
+    background: var(--color-button-hover);
+}
+
+/* 🔹 Exit Button */
+.logout {
+    display: inline-block;
+    padding: 12px 24px;
+    background: var(--color-red);
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.logout:hover {
+    background: var(--color-red-hover);
+}

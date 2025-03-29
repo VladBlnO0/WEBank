@@ -1,62 +1,63 @@
 <!DOCTYPE html>
 <html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>Адміністративна панель</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <h1>Адміністративна панель</h1>
-    <p>Управління контентом</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>Адміністративна панель</title>
+        <link rel="stylesheet" href="css/styleadmin.css" />
+        <link href="css/cool-balls.css" rel="stylesheet" />
+    </head>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="admin.html">Адміністративна панель</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul>
-                <li><a href="admin-stats.html">Перегляд статистики</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul>
-                <li><a href="admin-users.html">Список користувачів</a></li>
-            </ul>
-        </nav>
-    </header>
+    <body>
+        <div class="dashboard">
+            <aside class="sidebar">
+                <div class="logo">@DMIN</div>
+                <nav class="nav">
+                    <a href="admin.html" class="nav-item">Адміністративна панель</a>
+                    <a href="admin-stats.html" class="nav-item">Статистика</a>
+                    <a href="admin-users.html" class="nav-item">Користувачі</a>
+                    <a href="admin-mainpage.html" class="nav-item">Контент</a>
+                </nav>
+                <a href="index.html" class="nav-item">Вийти</a>
+            </aside>
 
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Ім'я</th>
-            <th>Дії</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Перегляд свого рахунку</td>
-            <td><button type="submit">Редагувати</button> | <button type="submit">Видалити</button>
-            </tr>
-        <tr>
-            <td>2</td>
-            <td>Переказ коштів на картку</td>
-            <td><button type="submit">Редагувати</button> | <button type="submit">Видалити</button>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Оплата послуг</td>
-            <td><button type="submit">Редагувати</button> | <button type="submit">Видалити</button>
-        <tfoot>
-            <tr>
-                <th colspan="3">
-                    <button type="submit">Додати</button>
-                </th>
-            </tr>
-        </tfoot>
+            <main class="main-content">
+                <section class="content">
+                    <table border="1">
+                        <tr>
+                            <th>ID</th>
+                            <th>Ім'я</th>
+                            <th>Дії</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Перегляд свого рахунку</td>
+                            <td><button type="submit">Редагувати</button> | <button type="submit">Видалити</button></td>
+                        </tr>
 
-    </table>
+                        <tr>
+                            <td>2</td>
+                            <td>Переказ коштів на картку</td>
+                            <td><button type="submit">Редагувати</button> | <button type="submit">Видалити</button></td>
+                        </tr>
 
-    <a href="index.html">Вийти</a>
-</body>
+                        <tr>
+                            <td>3</td>
+                            <td>Оплата послуг</td>
+                            <td>
+                                <button type="submit">Редагувати</button> | <button type="submit">Видалити</button>
+                                <tfoot>
+                                        <th colspan="3">
+                                            <button type="submit">Додати</button>
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+            </main>
+        </div>
+
+    </body>
 </html>

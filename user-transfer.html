@@ -1,60 +1,56 @@
 <!DOCTYPE html>
 <html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>Переказ коштів</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body background="img/gimp_index-back_without_css.jpg">
-    <h1>Переказ коштів на картку</h1>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Переказ коштів</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    <body background="img/gimp_index-back_without_css.jpg">
+        <h1>Переказ коштів на картку</h1>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="user.html">Особистий кабінет</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul>
-                <li><a href="user-bill.html">Перегляд рахунку</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul>
-                <li><a href="user-services.html">Оплата послуг</a></li>
-            </ul>
-        </nav>
-    </header>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="user.html">Особистий кабінет</a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><a href="user-bill.html">Перегляд рахунку</a></li>
+                </ul>
+            </nav>
+            <nav>
+                <ul>
+                    <li><a href="user-services.html">Оплата послуг</a></li>
+                </ul>
+            </nav>
+        </header>
 
-    <h2>Ваш баланс:</h2>
-    <p>9,000 грн</p>
+        <h2>Ваш баланс:</h2>
+        <p>9,000 грн</p>
 
-    <h1>Переказ на картку</h1>
-    <table>
-        <tr>
-            <td><label for="username">Картка:</label></td>
-            <td><input type="text" id="username" name="username" required></td>
-        </tr>
-        <tr>
-            <td><label for="sum">Сума:</label></td>
-            <td><input type="number" id="sum" name="sum" required></td>
-        </tr>
-        <tr>
-            <td><label for="password">Призначення:</label></td>
-            <td><input type="text" id="reason" name="reason"></td>
-        </tr>
-        <tr>
-            <td>
-                    <input type="radio" name="money"> Гривня
-                    <input type="radio" name="money"> Долар
-                    <input type="radio" name="money"> Євро
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" align="center">
-                <button type="submit">Переказати</button>
-            </td>
-        </tr>
-    </table>
-</body>
+        <h1>Переказ на картку</h1>
+        <table>
+            <tr>
+                <td><label for="username">Картка:</label></td>
+                <td><input type="text" id="username" name="username" required /></td>
+            </tr>
+            <tr>
+                <td><label for="sum">Сума:</label></td>
+                <td><input type="number" id="sum" name="sum" required /></td>
+            </tr>
+            <tr>
+                <td><label for="password">Призначення:</label></td>
+                <td><input type="text" id="reason" name="reason" /></td>
+            </tr>
+            <tr>
+                <td><input type="radio" name="money" /> Гривня <input type="radio" name="money" /> Долар <input type="radio" name="money" /> Євро</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <button type="submit">Переказати</button>
+                </td>
+            </tr>
+        </table>
+    </body>
 </html>

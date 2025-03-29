@@ -1,64 +1,66 @@
 <!DOCTYPE html>
 <html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>Адміністративна панель</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
-    <h1>Адміністративна панель</h1>
-    <p>Керування користувачами</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>Адміністративна панель</title>
+        <link rel="stylesheet" href="css/styleadmin.css" />
+    </head>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="admin.html">Адміністративна панель</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul>
-                <li><a href="admin-stats.html">Перегляд статистики</a></li>
-            </ul>
-        </nav>
-        <nav>
-            <ul>
-                <li><a href="admin-mainpage.html">Управління контентом</a></li>
-            </ul>
-        </nav>
-    </header>
+    <body>
+        <div class="dashboard">
+            <aside class="sidebar">
+                <div class="logo">@DMIN</div>
+                <nav class="nav">
+                    <a href="admin.html" class="nav-item">Адміністративна панель</a>
+                    <a href="admin-stats.html" class="nav-item">Статистика</a>
+                    <a href="admin-users.html" class="nav-item">Користувачі</a>
+                    <a href="admin-mainpage.html" class="nav-item">Контент</a>
+                </nav>
+                <a href="index.html" class="nav-item">Вийти</a>
+            </aside>
 
-    <h2>Список користувачів</h2>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Ім'я</th>
-            <th>Баланс</th>
-            <th>Операції</th>
-            <th>Дії</th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>Іван Іваненко</td>
-            <td>10,000 грн</td>
-            <td><a href="admin-stats.html#ivan-ivanenko">Операції</a></td>
-            <td><button type="submit">Повідомити</button></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Марія Петрівна</td>
-            <td>5,500 грн</td>
-            <td><a href="admin-stats.html#maria-petrivna">Операції</a></td>
-            <td><button type="submit">Повідомити</button></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Петро Іванов</td>
-            <td>7,000 грн</td>
-            <td><a href="admin-stats.html#petro-ivanov">Операції</a></td>
-            <td><button type="submit">Повідомити</button></td>
-        </tr>
-    </table>
-
-    <a href="index.html">Вийти</a>
-</body>
+            <main class="main-content">
+                <section class="content">
+                    <h2>Список користувачів</h2>
+                    <table border="1">
+                        <tr>
+                            <th>ID</th>
+                            <th>Ім'я</th>
+                            <th>Баланс</th>
+                            <th>Операції</th>
+                            <th>Дії</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Іван Іваненко</td>
+                            <td>10,000 грн</td>
+                            <td>
+                                <a href="admin-stats.html#ivan-ivanenko">Операції</a>
+                            </td>
+                            <td><button type="submit">Повідомити</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Марія Петрівна</td>
+                            <td>5,500 грн</td>
+                            <td>
+                                <a href="admin-stats.html#maria-petrivna">Операції</a>
+                            </td>
+                            <td><button type="submit">Повідомити</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Петро Іванов</td>
+                            <td>7,000 грн</td>
+                            <td>
+                                <a href="admin-stats.html#petro-ivanov">Операції</a>
+                            </td>
+                            <td><button type="submit">Повідомити</button></td>
+                        </tr>
+                    </table>
+                </section>
+            </main>
+        </div>
+    </body>
 </html>

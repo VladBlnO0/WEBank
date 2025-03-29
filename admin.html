@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <title>Адміністративна панель</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="css/style-admin.css" rel="stylesheet">
-    <link href="css/cool-balls.css" rel="stylesheet">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>Адміністративна панель</title>
+        <link rel="stylesheet" href="css/styleadmin.css" />
+        <link href="css/cool-balls.css" rel="stylesheet" />
+    </head>
 
-</head>
-<body>
+    <body>
+        <div class="dashboard">
+            <aside class="sidebar">
+                <div class="logo">@DMIN</div>
+                <nav class="nav">
+                    <a href="admin.html" class="nav-item">Адміністративна панель</a>
+                    <a href="admin-stats.html" class="nav-item">Статистика</a>
+                    <a href="admin-users.html" class="nav-item">Користувачі</a>
+                    <a href="admin-mainpage.html" class="nav-item">Контент</a>
+                </nav>
+                <a href="index.html" class="nav-item">Вийти</a>
+            </aside>
 
-    <div class="admin-container">
-        <h1>Адміністративна панель</h1>
-        <p>Керування користувачами та фінансами</p>
+            <main class="main-content">
+                <section class="content">
+                    <h1>Адміністративна панель</h1>
+                    <p>Керування користувачами та фінансами</p>
+                    <p>Оберіть необхідний варіант з бокової панелі</p>
 
-        <div class="newtons-cradle">
-            <div class="newtons-cradle__dot"></div>
-            <div class="newtons-cradle__dot"></div>
-            <div class="newtons-cradle__dot"></div>
-            <div class="newtons-cradle__dot"></div>
+                    <div class="newtons-cradle">
+                        <div class="newtons-cradle__dot"></div>
+                        <div class="newtons-cradle__dot"></div>
+                        <div class="newtons-cradle__dot"></div>
+                        <div class="newtons-cradle__dot"></div>
+                    </div>
+                </section>
+            </main>
         </div>
-
-        <div class="buttons">
-            <a href="admin-stats.html" class="btn">Статистика</a>
-            <a href="admin-users.html" class="btn">Користувачі</a>
-            <a href="admin-mainpage.html" class="btn">Контент</a>
-        </div>
-
-        <section id="exit">
-            <a href="index.html" class="btn logout">Вийти</a>
-        </section>
-
-    </div>
-
-</body>
+    </body>
 </html>

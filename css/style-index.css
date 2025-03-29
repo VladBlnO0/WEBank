@@ -1,7 +1,7 @@
-@import url('palette.css');
+@import url("palette.css");
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
 
@@ -26,7 +26,7 @@ body {
     margin: center;
 
     position: absolute;
-    top: 25%;
+    top: 20%;
 
     background-color: var(--color-container-background);
     padding: 100px;
@@ -44,7 +44,7 @@ h1 {
 }
 
 .highlight {
-    color: #1EAE41;
+    color: #1eae41;
     font-style: italic;
 }
 
@@ -75,7 +75,6 @@ h1 {
     transition: 0.3s ease;
 
     width: 200px;
-
 }
 
 .btn:hover {

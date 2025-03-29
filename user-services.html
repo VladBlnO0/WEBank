@@ -2,64 +2,59 @@
 <html lang="uk">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Оплата послуг</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="css/style-user.css" />
+        <link href="css/cool-balls.css" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
     </head>
-
-    <body background="img/gimp_index-back_without_css.jpg">
-        <h1>Оплата послуг</h1>
-
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="user-bill.html">Перегляд свого рахунку</a></li>
-                </ul>
-            </nav>
-            <nav>
-                <ul>
-                    <li><a href="user-transfer.html">Переказ коштів на картку</a></li>
-                </ul>
-            </nav>
-            <nav>
-                <ul>
-                    <li><a href="user-services.html">Оплата послуг</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <h2>Ваш баланс:</h2>
-        <p>10,000 грн</p>
-
-        <h2>Список послуг</h2>
-        <table border="1">
-            <tr>
-                <th>ID</th>
-                <th>Послуга</th>
-                <th>Сума</th>
-                <th>Оплатити</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Водопостачання</td>
-                <td>1,000 грн</td>
-                <td><button type="submit">Оплатити</button></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Теплопостачання</td>
-                <td>500 грн</td>
-                <td><button type="submit">Оплатити</button></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Електропостачання</td>
-                <td>800 грн</td>
-                <td><button type="submit">Оплатити</button></td>
-            </tr>
-        </table>
-
-        <section id="exit">
-            <h3><a href="index.html">Вийти</a></h3>
-        </section>
+    <body>
+        <div class="dashboard">
+            <aside class="sidebar">
+                <div class="container">
+                    <div class="logo">USER</div>
+                    <nav class="nav">
+                        <a href="user.html" class="nav-item">Особистий кабінет</a>
+                        <a href="user-bill.html" class="nav-item">Перегляд рахунку</a>
+                        <a href="user-transfer.html" class="nav-item">Переказ коштів</a>
+                        <a href="user-services.html" class="nav-item">Оплата послуг</a>
+                    </nav>
+                </div>
+                <a href="index.html" class="exit">Вийти</a>
+            </aside>
+            <main class="main-content">
+                <section class="content">
+                    <h2>Ваш баланс:</h2>
+                    <p>10,000 грн</p>
+                    <h2>Список послуг</h2>
+                    <table border="1">
+                        <tr>
+                            <th>ID</th>
+                            <th>Послуга</th>
+                            <th>Сума</th>
+                            <th>Оплатити</th>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>Водопостачання</td>
+                            <td>1,000 грн</td>
+                            <td><button type="submit">Оплатити</button></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Теплопостачання</td>
+                            <td>500 грн</td>
+                            <td><button type="submit">Оплатити</button></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Електропостачання</td>
+                            <td>800 грн</td>
+                            <td><button type="submit">Оплатити</button></td>
+                        </tr>
+                    </table>
+                </section>
+            </main>
+        </div>
     </body>
 </html>

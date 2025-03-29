@@ -1,83 +1,63 @@
-@import url("palette.css");
-
-body {
-    font-family: "Poppins", sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background: linear-gradient(-180deg, var(--color-admin-gradient-start), var(--color-admin-gradient-end));
-    color: var(--color-text);
-    text-align: center;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Segoe UI", sans-serif;
+    background: #f4f6f9;
+}
+.dashboard {
+    display: flex;
     height: 100vh;
-
+}
+.sidebar {
+    width: 240px;
+    background-color: #1c1f26;
+    color: #fff;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    padding: 20px;
 }
-
-.admin-container {
-    background: var(--color-container-background);
-    padding: 100px;
-    width: 50%;
-    border-radius: 35px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(100px);
-
-    flex: 1;
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 30px;
 }
-
+.nav {
+    flex-grow: 1;
+}
+.nav-item {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: color 0.3s;
+}
+.nav-item:hover,
+.nav-item.active {
+    color: #fff;
+}
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
 h1 {
-    font-size: 36px;
-    font-weight: 700;
-}
-
-p {
-    font-size: 18px;
-}
-
-.buttons {
-    margin-top: 20px;
-
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    margin: 0;
-    color: var(--color-white);
-    background: var(--color-button);
-    text-decoration: none;
+    font-size: 2.5rem;
     font-weight: bold;
-    border-radius: 8px;
-    transition: 0.3s ease;
-
-    width: 200px;
+    color: #1a1a1a;
 }
-.btn:hover {
-    background: var(--color-button-hoover);
-}
-
-.logout {
-    margin-top: 30px;
+.content {
+    text-align: center;
+    gap: 15px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-
-    display: inline-block;
-    padding: 12px 24px;
-    background: var(--color-red);
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.logout:hover {
-    background: var(--color-red-hover);
+    margin: auto;
+    width: 50%;
+    height: 100%;
+    background-color: var(--color-white);
+    padding: 80px;
+    box-sizing: border-box;
+    flex: 1;
 }

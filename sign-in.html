@@ -4,31 +4,29 @@
         <meta charset="UTF-8" />
         <title>Вхід</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/" />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+            crossorigin="anonymous"
+        />
+        <!-- Custom styles for this template -->
+        <link href="css/style-sign-in.css" rel="stylesheet" />
     </head>
-    <body background="img/gimp_index-back_without_css.jpg">
-        <h1>Вхід до особистого кабінету</h1>
-        <form action="user.html" method="get">
-            <table>
-                <tr>
-                    <td><label for="username">ID користувача:</label></td>
-                    <td><input type="text" id="username" name="username" required /></td>
-                </tr>
-                <tr>
-                    <td><label for="password">Пароль:</label></td>
-                    <td>
-                        <input type="password" id="password" name="password" required />
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="2" align="center">
-                        <button type="submit">Увійти</button>
-                    </td>
-                </tr>
-            </table>
+    <body class="text-center">
+        <form action="user.html" method="get" class="form-signin">
+            <h1 class="h3 mb-3 font-weight-normal">Вхід</h1>
+            <label for="inputEmail" class="sr-only">ID користувача</label>
+            <input type="text" id="username" class="form-control" placeholder="ID користувача" required autofocus />
+            <label for="password" class="sr-only">Пароль</label>
+            <input type="password" id="password" class="form-control" placeholder="Пароль" required />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Увійти</button>
         </form>
-        <a href="sign-up.html">Реєстрація</a>
-        <footer>
-            <a href="index.html">Назад на головну</a>
-        </footer>
+        <form action="sign-up.html" method="get" class="form-signin">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Реєстрація</button>
+        </form>
+        <footer>&copy; 2025 WEBank. Всі права захищені.</footer>
     </body>
 </html>

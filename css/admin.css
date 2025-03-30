@@ -10,6 +10,7 @@ body {
 .dashboard {
     display: flex;
     height: 100vh;
+    overflow: hidden;
 }
 .sidebar {
     width: 240px;
@@ -40,6 +41,7 @@ body {
     color: #fff;
 }
 .main-content {
+    overflow-y: auto;
     flex-grow: 1;
     padding: 20px;
 }
@@ -53,11 +55,62 @@ h1 {
     gap: 15px;
     display: flex;
     flex-direction: column;
-    margin: auto;
-    width: 50%;
-    height: 100%;
+    align-items: center;
+
+    width: 100%;
     background-color: var(--color-white);
     padding: 80px;
     box-sizing: border-box;
     flex: 1;
+}
+
+.table {
+    table-layout: fixed;
+
+    width: 150vh;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+.name-section {
+    background: #f4f6f9;
+    color: #000;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.name {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.table th,
+.table td {
+    border: 1px solid #333;
+    padding: 8px 12px;
+}
+
+.table th {
+    background: var(--color-container-admin-background);
+}
+
+.btn {
+    width: 100%;
+
+    display: inline-block;
+    padding: 12px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-white);
+    background: var(--color-button);
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+.btn:hover {
+    background: var(--color-button-hoover);
+    cursor: pointer;
 }

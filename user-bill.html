@@ -4,8 +4,10 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <title>Перегляд рахунку</title>
-        <link rel="stylesheet" href="css/style-user.css" />
+        <link href="css/user.css" rel="stylesheet" />
         <link href="css/cool-balls.css" rel="stylesheet" />
+        <link href="css/test.css" rel="stylesheet" />
+
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet" />
     </head>
     <body>
@@ -24,39 +26,79 @@
             </aside>
             <main class="main-content">
                 <section class="content">
-                    <h2>Ваш баланс:</h2>
-                    <p>9,000 грн</p>
-                    <h2>Останні операції:</h2>
-                    <table border="1">
-                        <tr>
-                            <th>ID</th>
-                            <th>Операція</th>
-                            <th>Сума</th>
-                            <th>Остаточна сума</th>
-                            <th>Дата</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Переказ</td>
-                            <td>-500 грн</td>
-                            <td>9,000 грн</td>
-                            <td>03.03.2025</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Поповнення</td>
-                            <td>+1,000 грн</td>
-                            <td>9,500 грн</td>
-                            <td>02.02.2025</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Оплата комунальних послуг</td>
-                            <td>-500 грн</td>
-                            <td>8,500 грн</td>
-                            <td>01.01.2025</td>
-                        </tr>
-                    </table>
+                    <div class="dashboard-wrapper">
+                        <!-- Summary Cards -->
+                        <div class="card-container">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span>SALES</span>
+                                    <span class="small-text">Last 7 days ⌄</span>
+                                </div>
+                                <div class="card-content">
+                                    <h2>75%</h2>
+                                    <div class="conversion">
+                                        <span>Conversion rate</span>
+                                        <span class="rate-up">7% ⬆</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-content icon-card">
+                                    <div class="icon">💲</div>
+                                    <div>
+                                        <strong>132 Sales</strong><br />
+                                        <span class="small-text">12 waiting payments</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Balance and Transactions Table -->
+                        <div class="balance-section">
+                            <h2>Ваш баланс:</h2>
+                            <p class="balance">9,000 грн</p>
+
+                            <h3>Останні операції:</h3>
+                            <table class="transaction-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Операція</th>
+                                        <th>Сума</th>
+                                        <th>Остаточна сума</th>
+                                        <th>Дата</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Переказ</td>
+                                        <td>-500 грн</td>
+                                        <td>9,000 грн</td>
+                                        <td>03.03.2025</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Поповнення</td>
+                                        <td>+1,000 грн</td>
+                                        <td>9,500 грн</td>
+                                        <td>02.02.2025</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Оплата комунальних послуг</td>
+                                        <td>-500 грн</td>
+                                        <td>8,500 грн</td>
+                                        <td>01.01.2025</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </section>
             </main>
         </div>

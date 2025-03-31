@@ -24,31 +24,30 @@
             </aside>
             <main class="main-content">
                 <section class="content">
-                    <h2>Ваш баланс:</h2>
-                    <p>9,000 грн</p>
-                    <h1>Переказ на картку</h1>
-                    <table>
-                        <tr>
-                            <td><label for="username">Картка:</label></td>
-                            <td><input type="text" id="username" name="username" required /></td>
-                        </tr>
-                        <tr>
-                            <td><label for="sum">Сума:</label></td>
-                            <td><input type="number" id="sum" name="sum" required /></td>
-                        </tr>
-                        <tr>
-                            <td><label for="password">Призначення:</label></td>
-                            <td><input type="text" id="reason" name="reason" /></td>
-                        </tr>
-                        <tr>
-                            <td><input type="radio" name="money" /> Гривня <input type="radio" name="money" /> Долар <input type="radio" name="money" /> Євро</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" align="center">
-                                <button type="submit">Переказати</button>
-                            </td>
-                        </tr>
-                    </table>
+                    <div>
+                        <h2 class="balance-section">Ваш баланс</h2>
+                        <p class="balance">9,000 грн</p>
+                        <h3 class="balance-section">Переказ на картку</h3>
+
+                        <form class="transfer-form">
+                            <label for="card">Картка:</label>
+                            <input type="text" id="card" name="card" required />
+
+                            <label for="sum">Сума:</label>
+                            <input type="number" id="sum" name="sum" required />
+
+                            <label for="reason">Призначення:</label>
+                            <input type="text" id="reason" name="reason" />
+
+                            <div class="currency-options">
+                                <label><input type="radio" name="money" /> Гривня</label>
+                                <label><input type="radio" name="money" /> Долар</label>
+                                <label><input type="radio" name="money" /> Євро</label>
+                            </div>
+
+                            <button type="submit" class="btn">Переказати</button>
+                        </form>
+                    </div>
                 </section>
             </main>
         </div>

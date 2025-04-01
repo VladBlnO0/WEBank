@@ -3,9 +3,7 @@ body {
     font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(-180deg, var(--color-gradient-start), var(--color-gradient-end));
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background: linear-gradient(-180deg, var(--color-gradient-start), var(--color-gradient-end)) no-repeat fixed;
     color: var(--color-text);
     text-align: center;
     min-height: 10vh;

@@ -15,7 +15,7 @@
     45%,
     55% {
       width: 4em;
-    } /* adjust width based on content */
+    }
     90%,
     100% {
       width: 0;
@@ -26,7 +26,7 @@
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
-    border-right: 0.2em solid var(--color-text); /* Cursor */
+    border-right: 0.2em solid var(--color-text);
     animation:
       typeAndDelete 4s steps(11) infinite,
       blinkCursor 0.5s step-end infinite alternate;

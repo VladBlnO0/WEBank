@@ -15,9 +15,6 @@
 
 }
 .contentContainer {
-    margin-bottom: 1rem;
-
-    margin: 10rem auto;
     padding: 5rem;
     background-color: var(--color-container-background);
     width: 50%;

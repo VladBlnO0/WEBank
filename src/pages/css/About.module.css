@@ -16,7 +16,7 @@
 
 }
 .contentContainer {
-    margin: 0rem auto;
+    margin: 0 auto;
     width: 50%;
     height: 100vh;
     background-color: var(--color-white);

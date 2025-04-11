@@ -9,13 +9,13 @@ class About extends React.Component {
         return (
             <main className={styles.mainContainer}>
                 <div className={styles.contentContainer}>
-                    <h1 className={styles.h1}>Про WEBank</h1>
-                    <p className={styles.p}>Ваш фінансовий партнер для безпечного майбутнього</p>
+                    <h1>Про WEBank</h1>
+                    <p>Ваш фінансовий партнер для безпечного майбутнього</p>
                     <section id="about">
-                        <h2 className={styles.h2}>Про нас</h2>
-                        <p className={styles.p}>Ми прагнемо допомогти вам досягти ваших фінансових цілей.</p>
+                        <h2>Про нас</h2>
+                        <p>Ми прагнемо допомогти вам досягти ваших фінансових цілей.</p>
                     </section>
-                    <p className={styles.p}>Наші послуги:</p>
+                    <p>Наші послуги:</p>
                     <section id="services">
                         <ul className={styles.ul}>
                             <li>Перегляд свого рахунку</li>
@@ -24,9 +24,9 @@ class About extends React.Component {
                         </ul>
                     </section>
                     <section id="contact">
-                        <h2 className={styles.h2}>Зв'язок з нами</h2>
-                        <p className={styles.p}>Пошта: gmail@WEBank.com</p>
-                        <p className={styles.p}>Телефон: +(839) 447-2387</p>
+                        <h2>Зв'язок з нами</h2>
+                        <p>Пошта: gmail@WEBank.com</p>
+                        <p>Телефон: +(839) 447-2387</p>
                     </section>
                     <NavLink to="/" className={styles.btn}>
                         Повернутися на головну сторінку

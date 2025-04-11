@@ -68,7 +68,6 @@ h1 {
     flex: 1;
 }
 .container {
-    margin: center;
     background-color: var(--color-container-background);
     padding: 20px;
     width: 100%;
@@ -122,7 +121,6 @@ h1 {
 .btn {
     width: 100%;
 
-    display: inline-block;
     padding: 12px 24px;
     display: flex;
     flex-direction: column;
@@ -160,7 +158,6 @@ h1 {
 
 .transfer-form input[type="text"],
 .transfer-form input[type="number"] {
-    padding: 5;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 6px;

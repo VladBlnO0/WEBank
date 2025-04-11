@@ -18,8 +18,6 @@ function SignIn() {
             navigate("/admin", { state: { from: "/sign-in" } });
         } else if (role === "user") {
             navigate("/user", { state: { from: "/sign-in" } });
-        } else {
-            alert("Невірні дані");
         }
     };
 

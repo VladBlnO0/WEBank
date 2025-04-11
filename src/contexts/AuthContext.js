@@ -7,14 +7,17 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
     const login = (username, password) => {
-        if (username === "admin" && password === "admin123") {
+        if (username === "admin" && password === "admin") {
             setIsAdmin(true);
             setUser("admin");
             return "admin";
-        } else {
+        }
+        if (username === "user" && password === "user") {
             setIsAdmin(false);
             setUser("user");
             return "user";
+        } else {
+            alert("Невірні дані");
         }
     };
 
@@ -23,11 +26,7 @@ export const AuthProvider = ({ children }) => {
         setIsAdmin(false);
     };
 
-    return (
-        <AuthContext.Provider value={{ isAdmin, user, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+    return <AuthContext.Provider value={{ isAdmin, user, login, logout }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);

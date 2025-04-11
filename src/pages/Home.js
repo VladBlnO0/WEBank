@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import styles from "./Home.module.css";
-import './components/footer.css';
+import styles from "./css/Home.module.css";
+import './etc/footer.css';
 
 class Home extends React.Component {
     render() {

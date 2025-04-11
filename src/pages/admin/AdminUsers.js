@@ -1,24 +1,32 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import styles from "./Admin.module.css";
-import "./components/cool-balls.css";
+import { NavLink, useLocation, Navigate } from "react-router-dom";
+import styles from "../css/Admin.module.css";
+import "../etc/cool-balls.css";
 
 export function AdminUsers() {
+    const location = useLocation();
+    const allowedFrom = ["/admin/admin-mainpage", "/admin/admin-stats", "/admin/admin-users", "/sign-in", "/sign-up", "/admin"];
+    const cameFrom = location.state?.from;
+
+    if (!allowedFrom.includes(cameFrom)) {
+        return <Navigate to="/404" replace />;
+    }
+
     return (
         <div className={styles.dashboard}>
             <aside className={styles.sidebar}>
                 <div className={styles.logo}>@DMIN</div>
                 <nav className={styles.nav}>
-                    <NavLink to="/admin" className={styles["nav-item"]}>
+                    <NavLink to="/admin" className={styles["nav-item"]} state={{ from: "/admin/admin-users" }}>
                         Адміністративна панель
                     </NavLink>
-                    <NavLink to="/admin-stats" className={styles["nav-item"]}>
+                    <NavLink to="/admin-stats" className={styles["nav-item"]} state={{ from: "/admin/admin-users" }}>
                         Статистика
                     </NavLink>
-                    <NavLink to="/admin-users" className={styles["nav-item"]}>
+                    <NavLink to="/admin-users" className={styles["nav-item"]} state={{ from: "/admin/admin-users" }}>
                         Користувачі
                     </NavLink>
-                    <NavLink to="/admin-mainpage" className={styles["nav-item"]}>
+                    <NavLink to="/admin-mainpage" className={styles["nav-item"]} state={{ from: "/admin/admin-users" }}>
                         Контент
                     </NavLink>
                 </nav>

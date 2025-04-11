@@ -1,25 +1,33 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import styles from "./User.module.css";
-import "./components/cool-balls.css";
+import { NavLink, Navigate, useLocation } from "react-router-dom";
+import styles from "../css/User.module.css";
+import "../etc/cool-balls.css";
 
 export default function UserServices() {
+    const location = useLocation();
+    const allowedFrom = ["/user/user-bill", "/user/user-transfer", "/user", "/user/user-service"];
+    const cameFrom = location.state?.from;
+
+    if (!allowedFrom.includes(cameFrom)) {
+        return <Navigate to="/404" replace />;
+    }
+
     return (
         <div className={styles.dashboard}>
             <aside className={styles.sidebar}>
                 <div className={styles.container}>
                     <div className={styles.logo}>USER</div>
                     <nav className={styles.nav}>
-                        <NavLink to="/user" className={styles["nav-item"]}>
+                        <NavLink to="/user" className={styles["nav-item"]} state={{ from: "/user/user-service" }}>
                             Особистий кабінет
                         </NavLink>
-                        <NavLink to="/user-bill" className={styles["nav-item"]}>
+                        <NavLink to="/user-bill" className={styles["nav-item"]} state={{ from: "/user/user-service" }}>
                             Перегляд рахунку
                         </NavLink>
-                        <NavLink to="/user-transfer" className={styles["nav-item"]}>
+                        <NavLink to="/user-transfer" className={styles["nav-item"]} state={{ from: "/user/user-service" }}>
                             Переказ коштів
                         </NavLink>
-                        <NavLink to="/user-services" className={styles["nav-item"]}>
+                        <NavLink to="/user-services" className={styles["nav-item"]}state={{ from: "/user/user-service" }}>
                             Оплата послуг
                         </NavLink>
                     </nav>

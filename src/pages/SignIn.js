@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+
 import "bootstrap/dist/css/bootstrap.css";
-import styles from "./Sign.module.css";
+import styles from "./css/Sign.module.css";
 
 function SignIn() {
-    const navigate = useNavigate();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const { login } = useAuth();
 
-    const goToUser = (e) => {
+    const handleLogin = (e) => {
         e.preventDefault();
-        navigate("/user");
+        const role = login(username, password);
+
+        if (role === "admin") {
+            navigate("/admin", { state: { from: "/sign-in" } });
+        } else if (role === "user") {
+            navigate("/user", { state: { from: "/sign-in" } });
+        } else {
+            alert("Невірні дані");
+        }
     };
+
+    const navigate = useNavigate();
 
     const goToSignUp = (e) => {
         e.preventDefault();
@@ -18,10 +32,10 @@ function SignIn() {
 
     return (
         <main className={styles.mainContainer}>
-            <form onSubmit={goToUser} className={styles["form-signin"]}>
+            <form onSubmit={handleLogin} className={styles["form-signin"]}>
                 <h1 className="h3 mb-3 font-weight-normal">Вхід</h1>
-                <input type="text" id="username" className="form-control" placeholder="ID користувача" required autoFocus />
-                <input type="password" id="password" className="form-control" placeholder="Пароль" required />
+                <input type="text" id="username" className="form-control" placeholder="ID користувача" required autoFocus value={username} onChange={(e) => setUsername(e.target.value)} />
+                <input type="password" id="password" className="form-control" placeholder="Пароль" required value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button className={styles.btn} type="submit">
                     Увійти
                 </button>

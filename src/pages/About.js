@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import styles from "./About.module.css";
-import "./components/footer.css";
+import styles from "./css/About.module.css";
+import "./etc/footer.css";
 
 class About extends React.Component {
     render() {

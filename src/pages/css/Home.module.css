@@ -1,4 +1,4 @@
-@import url("components/palette.css");
+@import url("../etc/palette.css");
 .mainContainer {
     font-family: "Poppins", sans-serif;
     line-height: 1.6;

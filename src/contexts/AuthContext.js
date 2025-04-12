@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
             setIsAdmin(true);
             setUser("admin");
             return "admin";
-        }
+        }asd
         if (username === "user" && password === "user") {
             setIsAdmin(false);
             setUser("user");

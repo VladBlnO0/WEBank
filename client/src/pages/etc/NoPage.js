@@ -8,7 +8,7 @@ class NoPage extends React.Component {
             <main className={styles.mainContainer}>
                 <h1>404</h1>
                 <p>Page does not exist or you did something wrong</p>
-                <div className={text}>Loading...</div>
+                <div className={styles.text}>Loading...</div>
             </main>
         );
     }

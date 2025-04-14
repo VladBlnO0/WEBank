@@ -1,13 +1,18 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-import styles from "./css/Home.module.css";
-import './etc/footer.css';
+import styles from './css/Home.module.css'
+import './etc/footer.css'
 
 class Home extends React.Component {
     render() {
         return (
             <main className={styles.mainContainer}>
+                <div className={`${styles.backgroundLayer} ${styles.layer1}`}></div>
+                <div className={`${styles.backgroundLayer} ${styles.layer2}`}></div>
+                <div className={`${styles.backgroundLayer} ${styles.layer3}`}></div>
+                <div className={`${styles.backgroundLayer} ${styles.layer4}`}></div>
+
                 <div className={styles.contentContainer}>
                     <h1 className={styles.h1}>
                         Ласкаво просимо до <span className={styles.highlight}>WEBank</span>-у
@@ -26,8 +31,8 @@ class Home extends React.Component {
                 </div>
                 <footer>&copy; 2025 WEBank. Всі права захищені.</footer>
             </main>
-        );
+        )
     }
 }
 
-export default Home;
+export default Home

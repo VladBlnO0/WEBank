@@ -1,8 +1,8 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-import styles from "./css/About.module.css";
-import "./etc/footer.css";
+import styles from './css/About.module.css'
+import './etc/footer.css'
 
 class About extends React.Component {
     render() {
@@ -34,8 +34,8 @@ class About extends React.Component {
                 </div>
                 <footer>&copy; 2025 WEBank. Всі права захищені.</footer>
             </main>
-        );
+        )
     }
 }
 
-export default About;
+export default About

@@ -27,7 +27,7 @@ export default function UserServices() {
                         <NavLink to="/user-transfer" className={styles["nav-item"]} state={{ from: "/user/user-service" }}>
                             Переказ коштів
                         </NavLink>
-                        <NavLink to="/user-services" className={styles["nav-item"]}state={{ from: "/user/user-service" }}>
+                        <NavLink to="/user-services" className={styles["nav-item"]} state={{ from: "/user/user-service" }}>
                             Оплата послуг
                         </NavLink>
                     </nav>

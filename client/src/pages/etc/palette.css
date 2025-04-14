@@ -1,0 +1,18 @@
+:root {
+    --color-background: #fcfcfc;
+    --color-text: #4478db;
+    --color-button: #4478db;
+    --color-button-hoover: #3967ba;
+    --color-container-background: #e4e4e4;
+    --color-white: #f4f4f4;
+    --color-green: #5e865c;
+    --color-black: #1a1a1a;
+    --color-gradient-start: #46a345b0;
+    --color-gradient-end: #368335;
+    --color-dashboard-background: #368335;
+    --color-red: #d9534f;
+    --color-red-hover: #c9302c;
+    --color-container-admin-background: #cccee394;
+    --color-admin-gradient-start: #a6aeea2a;
+    --color-admin-gradient-end: #2c5bdb7e;
+}

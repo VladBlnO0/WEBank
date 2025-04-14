@@ -1,0 +1,22 @@
+body {
+    position: relative;
+    width: 1707.33px;
+    height: 1053.44px;
+    overflow: hidden;
+    background: #235c42;
+}
+
+#rectangle {
+    position: absolute;
+    left: 204px;
+    width: 1298px;
+    height: 1053px;
+    border-radius: 53px;
+    background: linear-gradient(180deg, #bf3e3e 0%, #62d45c 100%);
+}
+
+.carousel-item img {
+    max-height: 200px;
+    object-fit: cover;
+    width: 100%;
+}

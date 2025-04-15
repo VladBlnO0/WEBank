@@ -1,19 +1,17 @@
-@import url("../etc/palette.css");
+@import url('../etc/palette.css');
 .mainContainer {
-    font-family: "Poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: var(--color-black);
 
     background: repeating-linear-gradient(45deg, #92c9b1, #92c9b1 20px, #b3e0d2 20px, #b3e0d2 40px);
     background-size: 100% 100%;
 
-
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-
 }
 .contentContainer {
     margin: 0 auto;

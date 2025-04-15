@@ -1,37 +1,70 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.css";
-import styles from "./css/Sign.module.css";
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { goToSignIn, goToUser } from '../utils/navigation'
+
+import Alert from 'react-bootstrap/Alert'
+import styles from './css/Sign.module.css'
+import { useAuth } from '../contexts/AuthContext'
 
 function SignUp() {
-    const navigate = useNavigate();
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [showAlert, setShowAlert] = useState(false)
+    const [alertData, setAlertData] = useState({ heading: '', content: null })
 
-    const goToUser = (e) => {
-        e.preventDefault();
-        navigate("/user", { state: { from: "/sign-in" } });
-    };
+    const { login } = useAuth()
 
-    const goToSigIn = (e) => {
-        e.preventDefault();
-        navigate("/sign-in");
-    };
+    const navigate = useNavigate()
+
     return (
         <main className={styles.mainContainer}>
-            <form onSubmit={goToUser} method="get" className={styles["form-signin"]}>
+            <div className={styles.alertBox}>
+                {showAlert && (
+                    <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                        <Alert.Heading>{alertData.heading}</Alert.Heading>
+                        {alertData.content}
+                    </Alert>
+                )}
+            </div>
+            <form
+                onSubmit={goToUser(navigate, username, password, setShowAlert, setAlertData)}
+                method="get"
+                id="form-sign-up"
+                className={styles['form-signin']}
+            >
                 <h1 className="h3 mb-3 font-weight-normal">Створення акаунта</h1>
-                <input type="text" id="username" className="form-control" placeholder="ID користувача" required autoFocus />
-                <input type="password" id="password" className="form-control" placeholder="Пароль" required />
+                <input
+                    type="text"
+                    id="username"
+                    maxLength="20"
+                    className="form-control"
+                    placeholder="ID користувача"
+                    required
+                    autoFocus
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <input
+                    type="password"
+                    id="password"
+                    maxLength="20"
+                    className="form-control"
+                    placeholder="Пароль"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
                 <button className={styles.btn} type="submit">
                     Створити
                 </button>
             </form>
-            <form onSubmit={goToSigIn} method="get" className={styles["form-signin"]}>
+            <form onSubmit={goToSignIn(navigate)} method="get" className={styles['form-signin']}>
                 <button className={styles.btn} type="submit">
                     Вже є акаунт?
                 </button>
             </form>
         </main>
-    );
+    )
 }
 
-export default SignUp;
+export default SignUp

@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { goToSignIn, goToUser } from '../utils/navigation'
+import { goToSignIn, handleSignUp } from '../utils/navigation'
 
 import Alert from 'react-bootstrap/Alert'
 import styles from './css/Sign.module.css'
-import { useAuth } from '../contexts/AuthContext'
 
 function SignUp() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [showAlert, setShowAlert] = useState(false)
     const [alertData, setAlertData] = useState({ heading: '', content: null })
-
-    const { login } = useAuth()
 
     const navigate = useNavigate()
 
@@ -27,7 +24,7 @@ function SignUp() {
                 )}
             </div>
             <form
-                onSubmit={goToUser(navigate, username, password, setShowAlert, setAlertData)}
+                onSubmit={handleSignUp(navigate, username, password, setShowAlert, setAlertData)}
                 method="get"
                 id="form-sign-up"
                 className={styles['form-signin']}

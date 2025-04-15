@@ -1,33 +1,35 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { goToSignUp } from '../utils/navigation'
-
+import { goToSignUp, handleSignIn } from '../utils/navigation'
 import { useAuth } from '../contexts/AuthContext'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import styles from './css/Sign.module.css'
+import Alert from 'react-bootstrap/Alert'
 
 function SignIn() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const { login } = useAuth()
-
-    const handleLogin = (e) => {
-        e.preventDefault()
-        const role = login(username, password)
-
-        if (role === 'admin') {
-            navigate('/admin', { state: { from: '/sign-in' } })
-        } else if (role === 'user') {
-            navigate('/user', { state: { from: '/sign-in' } })
-        }
-    }
+    const [showAlert, setShowAlert] = useState(false)
+    const [alertData, setAlertData] = useState({ heading: '', content: null })
 
     const navigate = useNavigate()
+    const { setUser, setIsAdmin } = useAuth()
 
     return (
         <main className={styles.mainContainer}>
-            <form onSubmit={handleLogin} className={styles['form-signin']}>
+            <div className={styles.alertBox}>
+                {showAlert && (
+                    <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                        <Alert.Heading>{alertData.heading}</Alert.Heading>
+                        {alertData.content}
+                    </Alert>
+                )}
+            </div>
+            <form
+                onSubmit={handleSignIn(navigate, username, password, setUser, setShowAlert, setAlertData, setIsAdmin)}
+                className={styles['form-signin']}
+            >
                 <h1 className="h3 mb-3 font-weight-normal">Вхід</h1>
                 <input
                     type="text"

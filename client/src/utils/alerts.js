@@ -17,4 +17,8 @@ export const alerts = {
         heading: 'Помилка',
         content: <p>Користувач вже існує</p>,
     },
+    userNotExists: {
+        heading: 'Помилка',
+        content: <p>Користувач не існує</p>,
+    },
 }

@@ -1,15 +1,17 @@
-import React from "react";
-import { NavLink, Navigate, useLocation } from "react-router-dom";
-import styles from "../css/User.module.css";
-import "../etc/cool-balls.css";
+import React from 'react'
+import { NavLink, Navigate, useLocation } from 'react-router-dom'
+import styles from '../css/User.module.css'
+import '../etc/cool-balls.css'
+import { useAuth } from '../../contexts/AuthContext'
 
 export default function UserBill() {
-  const location = useLocation();
-    const allowedFrom = ["/user", "/user/user-transfer", "/user/user-service", "/user/user-bill"];
-    const cameFrom = location.state?.from;
+    const location = useLocation()
+    const allowedFrom = ['/user', '/user/user-transfer', '/user/user-service', '/user/user-bill']
+    const cameFrom = location.state?.from
+    const { logout } = useAuth()
 
     if (!allowedFrom.includes(cameFrom)) {
-        return <Navigate to="/404" replace />;
+        return <Navigate to="/404" replace />
     }
 
     return (
@@ -18,30 +20,30 @@ export default function UserBill() {
                 <div className={styles.container}>
                     <div className={styles.logo}>USER</div>
                     <nav className={styles.nav}>
-                        <NavLink to="/user" className={styles["nav-item"]} state={{ from: "/user/user-bill" }}>
+                        <NavLink to="/user" className={styles['nav-item']} state={{ from: '/user/user-bill' }}>
                             Особистий кабінет
                         </NavLink>
-                        <NavLink to="/user-bill" className={styles["nav-item"]} state={{ from: "/user/user-bill" }}>
+                        <NavLink to="/user-bill" className={styles['nav-item']} state={{ from: '/user/user-bill' }}>
                             Перегляд рахунку
                         </NavLink>
-                        <NavLink to="/user-transfer" className={styles["nav-item"]} state={{ from: "/user/user-bill" }}>
+                        <NavLink to="/user-transfer" className={styles['nav-item']} state={{ from: '/user/user-bill' }}>
                             Переказ коштів
                         </NavLink>
-                        <NavLink to="/user-services" className={styles["nav-item"]} state={{ from: "/user/user-bill" }}>
+                        <NavLink to="/user-services" className={styles['nav-item']} state={{ from: '/user/user-bill' }}>
                             Оплата послуг
                         </NavLink>
                     </nav>
                 </div>
-                <NavLink to="/" className={styles.exit}>
+                <NavLink to="/" onClick={logout} className={styles.exit}>
                     Вийти
                 </NavLink>
             </aside>
 
-            <div className={styles["main-content"]}>
+            <div className={styles['main-content']}>
                 <section className={styles.content}>
-                    <h2 className={styles["balance-section"]}>Ваш баланс</h2>
+                    <h2 className={styles['balance-section']}>Ваш баланс</h2>
                     <p className={styles.balance}>9,000 грн</p>
-                    <h3 className={styles["balance-section"]}>Останні операції</h3>
+                    <h3 className={styles['balance-section']}>Останні операції</h3>
                     <table className={styles.table}>
                         <thead>
                             <tr>
@@ -79,5 +81,5 @@ export default function UserBill() {
                 </section>
             </div>
         </div>
-    );
+    )
 }

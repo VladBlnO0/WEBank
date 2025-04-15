@@ -1,2 +1,0 @@
-TODO Create maybe something with registration so it will be count as js coding
-TODO When user will create password there will be check for some length and if there number symbols something cool

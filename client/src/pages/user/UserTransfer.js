@@ -1,15 +1,17 @@
-import React from "react";
-import { NavLink, Navigate, useLocation } from "react-router-dom";
-import styles from "../css/User.module.css";
-import "../etc/cool-balls.css";
+import React from 'react'
+import { NavLink, Navigate, useLocation } from 'react-router-dom'
+import styles from '../css/User.module.css'
+import '../etc/cool-balls.css'
+import { useAuth } from '../../contexts/AuthContext'
 
 export default function UserTransfer() {
-    const location = useLocation();
-    const allowedFrom = ["/user/user-bill", "/user", "/user/user-service", "/user/user-transfer"];
-    const cameFrom = location.state?.from;
+    const location = useLocation()
+    const allowedFrom = ['/user/user-bill', '/user', '/user/user-service', '/user/user-transfer']
+    const cameFrom = location.state?.from
+    const { logout } = useAuth()
 
     if (!allowedFrom.includes(cameFrom)) {
-        return <Navigate to="/404" replace />;
+        return <Navigate to="/404" replace />
     }
 
     return (
@@ -18,31 +20,31 @@ export default function UserTransfer() {
                 <div className={styles.container}>
                     <div className={styles.logo}>USER</div>
                     <nav className={styles.nav}>
-                        <NavLink to="/user" className={styles["nav-item"]} state={{ from: "/user/user-transfer" }}>
+                        <NavLink to="/user" className={styles['nav-item']} state={{ from: '/user/user-transfer' }}>
                             Особистий кабінет
                         </NavLink>
-                        <NavLink to="/user-bill" className={styles["nav-item"]} state={{ from: "/user/user-transfer" }}>
+                        <NavLink to="/user-bill" className={styles['nav-item']} state={{ from: '/user/user-transfer' }}>
                             Перегляд рахунку
                         </NavLink>
-                        <NavLink to="/user-transfer" className={styles["nav-item"]} state={{ from: "/user/user-transfer" }}>
+                        <NavLink to="/user-transfer" className={styles['nav-item']} state={{ from: '/user/user-transfer' }}>
                             Переказ коштів
                         </NavLink>
-                        <NavLink to="/user-services" className={styles["nav-item"]} state={{ from: "/user/user-transfer" }}>
+                        <NavLink to="/user-services" className={styles['nav-item']} state={{ from: '/user/user-transfer' }}>
                             Оплата послуг
                         </NavLink>
                     </nav>
                 </div>
-                <NavLink to="/" className={styles.exit}>
+                <NavLink to="/" onClick={logout} className={styles.exit}>
                     Вийти
                 </NavLink>
             </aside>
 
-            <main className={styles["main-content"]}>
+            <main className={styles['main-content']}>
                 <section className={styles.content}>
-                    <h2 className={styles["balance-section"]}>Ваш баланс</h2>
+                    <h2 className={styles['balance-section']}>Ваш баланс</h2>
                     <p className={styles.balance}>9,000 грн</p>
-                    <h3 className={styles["balance-section"]}>Переказ на картку</h3>
-                    <form className={styles["transfer-form"]}>
+                    <h3 className={styles['balance-section']}>Переказ на картку</h3>
+                    <form className={styles['transfer-form']}>
                         <label htmlFor="card">Картка:</label>
                         <input type="text" id="card" name="card" required />
 
@@ -52,7 +54,7 @@ export default function UserTransfer() {
                         <label htmlFor="reason">Призначення:</label>
                         <input type="text" id="reason" name="reason" />
 
-                        <div className={styles["currency-options"]}>
+                        <div className={styles['currency-options']}>
                             <label>
                                 <input type="radio" name="money" /> Гривня
                             </label>
@@ -71,5 +73,5 @@ export default function UserTransfer() {
                 </section>
             </main>
         </div>
-    );
+    )
 }

@@ -44,10 +44,16 @@ export const handleSignIn = (navigate, username, password, setUserContext, setSh
 
     const users = JSON.parse(localStorage.getItem('users')) || []
 
-    const userExists = users.find((u) => u.username === username && u.password === password)
+    const userExists = users.find((u) => u.username === username)
+    const userPasswordRight = users.find((u) => u.username === username && u.password === password)
 
     if (!userExists) {
         setAlertData(alerts.userNotExists)
+        setShowAlert(true)
+        return
+    }
+    if (!userPasswordRight) {
+        setAlertData(alerts.passwordWrong)
         setShowAlert(true)
         return
     }

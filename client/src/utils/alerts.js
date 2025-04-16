@@ -21,4 +21,8 @@ export const alerts = {
         heading: 'Помилка',
         content: <p>Користувач не існує</p>,
     },
+    passwordWrong: {
+        heading: 'Помилка',
+        content: <p>Пароль неправильний</p>,
+    },
 }

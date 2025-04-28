@@ -3,7 +3,6 @@ WORKDIR /app
 COPY package.json .
 RUN npm install
 RUN npm install react-router-dom
-RUN npm install react-bootstrap bootstrap
 RUN npm install gh-pages --save-dev
 
 ENV ESLINT_NO_CACHE=true

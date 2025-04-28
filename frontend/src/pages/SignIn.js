@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { goToSignUp, handleSignIn } from '../utils/navigation'
 import { useAuth } from '../contexts/AuthContext'
 
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import styles from './css/Sign.module.css'
 import Alert from 'react-bootstrap/Alert'
 

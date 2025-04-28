@@ -4,5 +4,10 @@
   },
   "dependencies": {
     "bootstrap": "^5.3.5"
+  },
+  "homepage": "https://vladblno0.github.io/WEBank",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }

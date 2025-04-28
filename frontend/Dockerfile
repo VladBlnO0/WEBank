@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package.json .
 RUN npm install
 RUN npm install react-router-dom
-RUN npm install --save react-bootstrap bootstrap
+RUN npm install react-bootstrap
 
 ENV ESLINT_NO_CACHE=true
 

@@ -9,9 +9,6 @@ class Home extends React.Component {
         return (
             <main className={styles.mainContainer}>
                 <div className={`${styles.backgroundLayer} ${styles.layer1}`}></div>
-                <div className={`${styles.backgroundLayer} ${styles.layer2}`}></div>
-                <div className={`${styles.backgroundLayer} ${styles.layer3}`}></div>
-                <div className={`${styles.backgroundLayer} ${styles.layer4}`}></div>
 
                 <div className={styles.contentContainer}>
                     <h1 className={styles.h1}>

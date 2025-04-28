@@ -1,0 +1,4 @@
+//TODO add email to sign up
+//TODO php admin? add a database!
+//TODO remember me
+//TODO autofill

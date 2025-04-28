@@ -1,13 +1,26 @@
 version: '3.8'
 services:
+  frontend:
+    build: ./frontend
+    container_name: web_frontend
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./frontend:/app
+      - ./app/node_modules
+    stdin_open: true
+    tty: true
+
   backend:
-    build: backend
-    container_name: api_backend
+    build: ./backend
+    container_name: web_backend
     ports:
       - '4000:4000'
     volumes:
       - ./backend:/app
       - ./app/node_modules
+    depends_on:
+      - db
   db:
     image: mysql:8.3
     container_name: mysql_db
@@ -18,13 +31,3 @@ services:
       - '3306:3306'
     volumes:
       - ./mysql_data:/var/lib/mysql
-  frontend:
-    build: frontend
-    container_name: client_frontend
-    ports:
-      - '3000:3000'
-    volumes:
-      - ./frontend:/app
-      - ./app/node_modules
-    stdin_open: true
-    tty: true

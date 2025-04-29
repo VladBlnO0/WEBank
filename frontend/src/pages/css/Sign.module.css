@@ -16,6 +16,11 @@
 
     text-align: center;
     min-height: 100vh;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .alertBox {
     text-align: left;
@@ -49,16 +54,25 @@
     z-index: 2;
 }
 .form-signin input[type='text'] {
-    margin-bottom: 5px;
     padding: 12px 24px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.form-signin input[type='username'] {
+    padding: 12px 24px;
+    margin-bottom: 5px;
 
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
 }
-.form-signin input[type='password'] {
-    margin-bottom: 10px;
+.form-signin input[type='middle'] {
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 12px 24px;
-
+    border-radius: 0;
+}
+.form-signin input[type='password'] {
+    padding: 12px 24px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
@@ -83,4 +97,15 @@
 
 .btn:hover {
     background: var(--color-button-hoover);
+}
+
+.show-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
 }

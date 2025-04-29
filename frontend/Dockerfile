@@ -1,14 +1,19 @@
-FROM node:17-alpine
+FROM node:18
+
 WORKDIR /app
-COPY package.json .
+
+COPY package.json package-lock.json ./
+
 RUN npm install
-RUN npm install react-router-dom
-RUN npm install react-bootstrap
+RUN npm install react-router-dom react-bootstrap bootstrap-icons
 
 ENV ESLINT_NO_CACHE=true
 
 RUN chown -R node:node /app/node_modules
+USER node
 
 COPY . .
+
 EXPOSE 3000
+
 CMD ["npm", "start"]

@@ -1,37 +1,31 @@
-const express = require('express')
-const mysql = require('mysql2')
-const bodyParser = require('body-parser')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const path = require('path');
 
-const app = express()
-app.use(bodyParser.json())
+const loginRoute = require(path.join(__dirname, 'api', 'login'));
+const signupRoute = require(path.join(__dirname, 'api', 'signup'));
 
-const port = process.env.PORT || 4000
+const app = express();
+app.use(cors({ origin: 'http://localhost:3000', methods: ['GET', 'POST'] }));
+app.use(bodyParser.json());
 
-// Connect to MySQL
-const db = mysql.createConnection({
-    host: 'db',
-    user: 'root',
-    password: 'rootpassword',
-    database: 'bankdb',
-})
+app.use('/api/login', loginRoute);
+app.use('/api/signup', signupRoute);
 
-db.connect((err) => {
-    if (err) throw err
-    console.log('Connected to MySQL')
-})
+app.use((req, res, next) => {
+    if (req.path.endsWith('/') && req.path !== '/') {
+        res.redirect(301, req.path.slice(0, -1));
+    } else {
+        next();
+    }
+});
 
-// Login Route
-app.post('/api/login', (req, res) => {
-    const { username, password } = req.body
+app.use((req, res) => res.status(404).json({ message: `Route ${req.method} ${req.path} not found` }));
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Internal server error' });
+});
 
-    db.query('SELECT * FROM users WHERE username = ? AND password = ?', [username, password], (err, results) => {
-        if (err) return res.status(500).send('Server error')
-        if (results.length > 0) {
-            res.json({ message: 'Login successful', user: results[0] })
-        } else {
-            res.status(401).json({ message: 'Invalid credentials' })
-        }
-    })
-})
-
-app.listen(4000, () => console.log('Server running on port 4000'))
+const port = process.env.PORT || 4000;
+app.listen(port, () => console.log(`Server running on port ${port}`));

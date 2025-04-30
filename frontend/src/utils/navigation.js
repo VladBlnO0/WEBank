@@ -48,21 +48,15 @@ export const handleSignUp =
                 body: JSON.stringify({ username, email, phone, password }),
             })
 
-            const contentType = response.headers.get('Content-Type')
-            if (!contentType || !contentType.includes('application/json')) {
-                const text = await response.text()
-                throw new Error(`Expected JSON, got ${contentType || 'no content-type'}: ${text}`)
-            }
-
             if (!response.ok) {
                 const errorData = await response.json()
-                throw new Error(errorData.message || 'Signup failed')
+                throw new Error(errorData.message)
             }
 
             setShowAlert(false)
             navigate('/sign-in')
         } catch (error) {
-            setAlertData({ heading: 'Sign Up Error', content: error.message })
+            setAlertData({ heading: 'Помилка', content: error.message })
             setShowAlert(true)
         }
     }

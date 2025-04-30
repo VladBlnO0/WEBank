@@ -13,18 +13,11 @@ function SignIn() {
     const [alertData, setAlertData] = useState({ heading: '', content: null });
 
     const navigate = useNavigate();
-    const { setUser, setIsAdmin } = useAuth(); // Changed setUserContext to setUser
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Form submitted with:', { username, password });
-        const signInHandler = handleSignIn(navigate, username, password, setUser, setShowAlert, setAlertData, setIsAdmin);
-        signInHandler(e);
-    };
+    const { setUser, setIsAdmin } = useAuth();
 
     return (
         <main className={styles.mainContainer}>
-            <div className={styles.alertBox}>
+            <div className={styles.alertBoxSmall}>
                 {showAlert && (
                     <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
                         <Alert.Heading>{alertData.heading}</Alert.Heading>
@@ -32,14 +25,14 @@ function SignIn() {
                     </Alert>
                 )}
             </div>
-            <form onSubmit={handleSubmit} className={styles['form-signin']}>
+            <form onSubmit={handleSignIn(navigate, username, password, setUser, setShowAlert, setAlertData, setIsAdmin)} className={styles['form-signin']}>
                 <h1 className="h3 mb-3 font-weight-normal">Вхід</h1>
                 <input
-                    type="text"
+                    type="username"
                     id="username"
-                    maxLength="40"
+                    maxLength="60"
                     className="form-control"
-                    placeholder="ПІБ"
+                    placeholder="Ім'я"
                     required
                     autoFocus
                     value={username}

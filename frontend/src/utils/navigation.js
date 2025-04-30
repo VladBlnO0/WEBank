@@ -1,11 +1,4 @@
-// const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\S]{8,}$/
-// let isValid = regex.test(password)
-// if (!isValid) {
-//     setAlertData(alerts.passwordPolicy)
-//     setShowAlert(true)
-//     return
-// }
-// import { alerts } from './alerts'
+import { alerts } from './alerts'
 
 export const goToSignIn = (navigate) => (e) => {
     e.preventDefault()
@@ -20,15 +13,39 @@ export const goToSignUp = (navigate) => (e) => {
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://backend:4000';
 
 export const handleSignUp =
-    (navigate, username, email, phone, password, role = 'user', setShowAlert, setAlertData) =>
+    (navigate, username, email, phone, password, setShowAlert, setAlertData) =>
     async (e) => {
         e.preventDefault()
+
+        const regex_email = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
+        let isValidEmail = regex_email.test(email)
+        if (!isValidEmail) {
+            setAlertData(alerts.email)
+            setShowAlert(true)
+            return
+        }
+
+        const regex_phone = /^\+?[1-9][0-9]{7,14}$/;
+        let isValidPhone = regex_phone.test(phone)
+        if (!isValidPhone) {
+            setAlertData(alerts.phone)
+            setShowAlert(true)
+            return
+        }
+
+        const regex_password = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d])[A-Za-z\d\S]{8,}$/
+        let isValidPassword = regex_password.test(password)
+        if (!isValidPassword) {
+            setAlertData(alerts.passwordPolicy)
+            setShowAlert(true)
+            return
+        }
 
         try {
             const response = await fetch(`${API_BASE_URL}/api/signup`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username, email, phone, password, role }),
+                body: JSON.stringify({ username, email, phone, password }),
             })
 
             const contentType = response.headers.get('Content-Type')
@@ -53,7 +70,6 @@ export const handleSignUp =
 
 export const handleSignIn = (navigate, username, password, setUser, setShowAlert, setAlertData, setIsAdmin) => async (e) => {
     e.preventDefault();
-    console.log('Login attempt:', { username, password });
 
     try {
         const response = await fetch(`${API_BASE_URL}/api/login`, {
@@ -62,34 +78,20 @@ export const handleSignIn = (navigate, username, password, setUser, setShowAlert
             body: JSON.stringify({ username, password }),
         });
 
-        console.log('Fetch response:', response.status, response.statusText, response.headers.get('Content-Type'));
-
-        const contentType = response.headers.get('Content-Type');
-        if (!contentType || !contentType.includes('application/json')) {
-            const text = await response.text();
-            throw new Error(`Expected JSON, got ${contentType || 'no content-type'}: ${text}`);
-        }
-
         if (!response.ok) {
             const errorData = await response.json();
-            throw new Error(errorData.message || 'Invalid credentials');
+            throw new Error(errorData.message);
         }
 
         const data = await response.json();
-        if (!data.user) {
-            throw new Error('No user data in response');
-        }
-
         const user = data.user;
         setShowAlert(false);
-        setUser(user.username); // Changed setUserContext to setUser
+        setUser(user.username);
         setIsAdmin(user.role === 'admin');
         navigate(user.role === 'admin' ? '/admin' : '/user', { state: { from: '/sign-in' } });
+
     } catch (error) {
-        console.error('SignIn error:', error.message);
-        setAlertData({ heading: 'Login Error', content: error.message });
+        setAlertData({ heading: 'Помилка', content: error.message });
         setShowAlert(true);
     }
 };
-
-// Include handleSignUp, goToSignIn, goToSignUp as previously provided

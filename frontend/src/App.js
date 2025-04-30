@@ -17,25 +17,8 @@ import AdminUsers from './pages/admin/AdminUsers'
 import AdminMainpage from './pages/admin/AdminMainpage'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { useEffect } from 'react'
 
 function App() {
-    useEffect(() => {
-        const users = JSON.parse(localStorage.getItem('users')) || []
-
-        const adminExists = users.some((u) => u.username === 'admin')
-        const userExists = users.some((u) => u.username === 'user')
-
-        if (!adminExists) {
-            users.push({ username: 'admin', password: 'admin', role: 'admin' })
-            localStorage.setItem('users', JSON.stringify(users))
-        }
-        if (!userExists) {
-            users.push({ username: 'user', password: 'user', role: 'user' })
-            localStorage.setItem('users', JSON.stringify(users))
-        }
-    }, [])
-
     return (
         <div>
             <Router>

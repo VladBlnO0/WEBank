@@ -24,7 +24,7 @@ const connectWithRetry = async () => {
 };
 
 connectWithRetry().catch((err) => {
-    console.error('MySQL connection failed:', err);
+    console.error('Connection failed:', err);
     process.exit(1);
 });
 

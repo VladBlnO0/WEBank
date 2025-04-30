@@ -13,6 +13,14 @@ export const alerts = {
             </>
         ),
     },
+    email: {
+        heading: 'Помилка',
+        content: <p>Пошта неправильна</p>,
+    },
+    phone: {
+        heading: 'Помилка',
+        content: <p>Телефон неправильний</p>,
+    },
     userExists: {
         heading: 'Помилка',
         content: <p>Користувач вже існує</p>,

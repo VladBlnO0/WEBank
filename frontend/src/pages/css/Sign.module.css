@@ -36,6 +36,20 @@
 
     transition: all 0.3s ease-in-out;
 }
+.alertBoxSmall {
+    text-align: left;
+
+    position: absolute;
+    top: 300px;
+    left: 75%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 450px;
+
+    z-index: 20;
+
+    transition: all 0.3s ease-in-out;
+}
 .form-signin {
     height: 100%;
     width: 100%;

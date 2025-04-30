@@ -38,7 +38,7 @@ function SignUp() {
                     id="username"
                     maxLength="20"
                     className="form-control"
-                    placeholder="ПІБ"
+                    placeholder="Ім'я"
                     required
                     autoFocus
                     value={username}

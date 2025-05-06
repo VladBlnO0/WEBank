@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink, useLocation, Navigate } from "react-router-dom";
 import styles from "../css/Admin.module.css";
+import TransactionsChart from '../components/admin_js';
+
 
 export function AdminStats() {
     const location = useLocation();
@@ -107,6 +109,9 @@ export function AdminStats() {
                             </tr>
                         </tbody>
                     </table>
+                    <div>
+                        <TransactionsChart />
+                    </div>
                 </section>
             </main>
         </div>

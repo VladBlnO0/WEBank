@@ -6,12 +6,13 @@ router.post('/', async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        db.query('SELECT * FROM users WHERE username = ? AND password = ?',
+        db.query('SELECT * FROM user.users WHERE username = ? AND password = ?',
             [username, password],
             async (err, results) => {
 
             if (err) {
-                return res.status(500);
+                console.error('DB error:', err);
+                return res.status(500).json({ message: 'Серверна помилка' });
             }
 
             if (results.length === 0 || results[0].password !== password) {

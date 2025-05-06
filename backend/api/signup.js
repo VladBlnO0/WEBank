@@ -6,7 +6,7 @@ router.post('/', async (req, res) => {
     const { username, email, phone, password } = req.body;
 
     try {
-        db.query('SELECT * FROM users WHERE username = ? AND password = ?',
+        db.query('SELECT * FROM user.users WHERE username = ? AND password = ?',
             [username, password], async (err, results) => {
             if (err) return res.status(500).json({ message: 'Server error' });
             if (results.length > 0) return res.status(400).json({ message: 'Користувач вже існує' });

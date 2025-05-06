@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { goToSignUp, handleSignIn } from '../utils/navigation';
+import { goToSignUp, handleSignIn } from './components/navigation';
 import { useAuth } from '../contexts/AuthContext';
 import styles from './css/Sign.module.css';
 import Alert from 'react-bootstrap/Alert';

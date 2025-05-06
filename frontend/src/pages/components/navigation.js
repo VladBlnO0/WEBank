@@ -72,12 +72,12 @@ export const handleSignIn = (navigate, username, password, setUser, setShowAlert
             body: JSON.stringify({ username, password }),
         });
 
+        const data = await response.json();
+
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message);
+            throw new Error(data.message);
         }
 
-        const data = await response.json();
         const user = data.user;
         setShowAlert(false);
         setUser(user.username);

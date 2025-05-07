@@ -43,6 +43,8 @@ services:
       - '3306:3306'
     volumes:
       - ./mysql_data:/var/lib/mysql
+      - ./docker-entrypoint-initdb:/docker-entrypoint-initdb
+      - ./db-dumps:/dumps
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s

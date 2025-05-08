@@ -32,6 +32,80 @@ export function AdminUsers() {
             </aside>
             <main className={styles["main-content"]}>
                 <section className={styles.content}>
+                <h3 className={styles["name-section"]}>Іван Іваненко</h3>
+                <table className={styles.table}>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Операція</th>
+                        <th>Сума</th>
+                        <th>Остаточна сума</th>
+                        <th>Дата</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Переказ</td>
+                        <td>-500 грн</td>
+                        <td>9,500 грн</td>
+                        <td>03.03.2025</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Переказ</td>
+                        <td>-500 грн</td>
+                        <td>9,500 грн</td>
+                        <td>03.03.2025</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3 className={styles["name-section"]}>Марія Петрівна</h3>
+                <table className={styles.table}>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Операція</th>
+                        <th>Сума</th>
+                        <th>Остаточна сума</th>
+                        <th>Дата</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Переказ</td>
+                        <td>-500 грн</td>
+                        <td>9,000 грн</td>
+                        <td>03.03.2025</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <h3 className={styles["name-section"]}>Петро Іванов</h3>
+                <table className={styles.table} id="petro-ivanov">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Операція</th>
+                        <th>Сума</th>
+                        <th>Остаточна сума</th>
+                        <th>Дата</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Переказ</td>
+                        <td>-500 грн</td>
+                        <td>6,500 грн</td>
+                        <td>03.03.2025</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+                <section className={styles.content}>
                     <h3 className={styles["name-section"]}>Список користувачів</h3>
                     <table className={styles.table}>
                         <thead>

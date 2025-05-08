@@ -4,7 +4,19 @@ import { NavLink } from 'react-router-dom'
 import styles from './css/About.module.css'
 import './etc/footer.css'
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+
 class About extends React.Component {
+    componentDidMount() {
+        fetch(`${API_BASE_URL}/api/content/about`)
+            .then(res => res.json())
+            .then(data => this.setState({
+                intro: data.intro,
+                services: data.services,
+                contact: data.contact
+            }));
+    }
+
     render() {
         return (
             <main className={styles.mainContainer}>
@@ -13,20 +25,14 @@ class About extends React.Component {
                     <p>Ваш фінансовий партнер для безпечного майбутнього</p>
                     <section id="about">
                         <h2>Про нас</h2>
-                        <p>Ми прагнемо допомогти вам досягти ваших фінансових цілей.</p>
-                    </section>
+                        dangerouslySetInnerHTML={{ __html: this.state.intro }}                    </section>
                     <p>Наші послуги:</p>
                     <section id="services">
-                        <ul className={styles.ul}>
-                            <li>Перегляд свого рахунку</li>
-                            <li>Переказ коштів на картку</li>
-                            <li>Оплата послуг</li>
-                        </ul>
+                        dangerouslySetInnerHTML={{ __html: this.state.services }}
                     </section>
                     <section id="contact">
                         <h2>Зв'язок з нами</h2>
-                        <p>Пошта: gmail@WEBank.com</p>
-                        <p>Телефон: +(839) 447-2387</p>
+                        dangerouslySetInnerHTML={{ __html: this.state.contact }}
                     </section>
                     <NavLink to="/" className={styles.btn}>
                         Повернутися на головну сторінку

@@ -85,97 +85,37 @@ export function Admin() {
             </aside>
             <main className={styles["main-content"]}>
                 <section className={styles.content}>
-                    <h3 className={styles["name-section"]}>Іван Іваненко</h3>
-                    <table className={styles.table}>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Операція</th>
-                            <th>Сума</th>
-                            <th>Остаточна сума</th>
-                            <th>Дата</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Переказ</td>
-                            <td>-500 грн</td>
-                            <td>9,500 грн</td>
-                            <td>03.03.2025</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Переказ</td>
-                            <td>-500 грн</td>
-                            <td>9,500 грн</td>
-                            <td>03.03.2025</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div className="text-xl font-bold h2 bg-white rounded p-4 shadow">Total Users: {stats.totalUsers}</div>
 
-                    <h3 className={styles["name-section"]}>Марія Петрівна</h3>
-                    <table className={styles.table}>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Операція</th>
-                            <th>Сума</th>
-                            <th>Остаточна сума</th>
-                            <th>Дата</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Переказ</td>
-                            <td>-500 грн</td>
-                            <td>9,000 грн</td>
-                            <td>03.03.2025</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div className="bg-white rounded p-4 shadow" style={{ height: 400, width: '100%'}} >
+                        <div style={{ maxWidth: '100%', height: '100%' }}>
 
-                    <h3 className={styles["name-section"]}>Петро Іванов</h3>
-                    <table className={styles.table} id="petro-ivanov">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Операція</th>
-                            <th>Сума</th>
-                            <th>Остаточна сума</th>
-                            <th>Дата</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Переказ</td>
-                            <td>-500 грн</td>
-                            <td>6,500 грн</td>
-                            <td>03.03.2025</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                        <div className="text-xl font-bold">Total Users: {stats.totalUsers}</div>
-
-                        <div className="bg-white rounded p-4 shadow" style={{ height: 400, width: '100%'}} >
-                            <h2 className="text-lg font-semibold mb-2">New Users This Week</h2>
-                            <Bar data={userChartData} />
-                        </div>
-
-                        <div className="bg-white rounded p-4 shadow">
-                            <h2 className="text-lg font-semibold mb-2">Transactions This Week</h2>
-                            <Bar data={transactionChartData} options={{
+                            <Bar data={userChartData} options={{
                                 responsive: true,
+                                maintainAspectRatio: false,
                                 plugins: {
                                     title: {
                                         display: true,
                                         text: 'User Growth This Week'
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            title: (tooltipItems) => {
+                                                const date = new Date(tooltipItems[0].label);
+                                                return date.toLocaleDateString('uk-UA', { day: 'numeric', month: 'short', year: 'numeric' });
+                                            }
+                                        }
                                     }
                                 },
                                 scales: {
+                                    x: {
+                                        ticks: {
+                                            display: false
+                                        },
+                                        grid: {
+                                            display: false
+                                        }
+                                    },
                                     y: {
                                         beginAtZero: true,
                                         ticks: {
@@ -183,8 +123,48 @@ export function Admin() {
                                         }
                                     }
                                 }
-                            }} />
+                            }} style={{ width: '100%', height: '100%' }} />
                         </div>
+                    </div>
+
+                    <div className="bg-white rounded p-4 shadow" style={{ height: 400, width: '100%'}}>
+                        <div style={{ maxWidth: '100%', height: '100%' }}>
+                            <Bar data={transactionChartData} options={{
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'User Growth This Week'
+                                    },
+                                    tooltip: {
+                                        callbacks: {
+                                            title: (tooltipItems) => {
+                                                const date = new Date(tooltipItems[0].label);
+                                                return date.toLocaleDateString('uk-UA', { day: 'numeric', month: 'short', year: 'numeric' });
+                                            }
+                                        }
+                                    }
+                                },
+                                scales: {
+                                    x: {
+                                        ticks: {
+                                            display: false
+                                        },
+                                        grid: {
+                                            display: false
+                                        }
+                                    },
+                                    y: {
+                                        beginAtZero: true,
+                                        ticks: {
+                                            stepSize: 1
+                                        }
+                                    }
+                                }
+                            }}  style={{ width: '100%', height: '100%' }}/>
+                        </div>
+                    </div>
                 </section>
             </main>
         </div>

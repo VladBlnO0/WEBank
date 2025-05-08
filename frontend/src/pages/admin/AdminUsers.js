@@ -1,11 +1,10 @@
 import React from "react";
 import { NavLink, useLocation, Navigate } from "react-router-dom";
 import styles from "../css/Admin.module.css";
-import "../etc/cool-balls.css";
 
 export function AdminUsers() {
     const location = useLocation();
-    const allowedFrom = ["/admin/admin-mainpage", "/admin/admin-stats", "/admin/admin-users", "/sign-in", "/sign-up", "/admin"];
+    const allowedFrom = ["/admin/admin-mainpage", "/admin/admin-users", "/sign-in", "/sign-up", "/admin"];
     const cameFrom = location.state?.from;
 
     if (!allowedFrom.includes(cameFrom)) {
@@ -19,9 +18,6 @@ export function AdminUsers() {
                 <nav className={styles.nav}>
                     <NavLink to="/admin" className={styles["nav-item"]} state={{ from: "/admin/admin-users" }}>
                         Адміністративна панель
-                    </NavLink>
-                    <NavLink to="/admin-stats" className={styles["nav-item"]} state={{ from: "/admin/admin-users" }}>
-                        Статистика
                     </NavLink>
                     <NavLink to="/admin-users" className={styles["nav-item"]} state={{ from: "/admin/admin-users" }}>
                         Користувачі

@@ -4,7 +4,7 @@ import styles from "../css/Admin.module.css";
 
 export function AdminMainpage() {
     const location = useLocation();
-    const allowedFrom = ["/admin/admin-mainpage", "/admin/admin-stats", "/admin/admin-users", "/sign-in", "/sign-up", "/admin"];
+    const allowedFrom = ["/admin/admin-mainpage", "/admin/admin-users", "/sign-in", "/sign-up", "/admin"];
     const cameFrom = location.state?.from;
 
     if (!allowedFrom.includes(cameFrom)) {
@@ -18,9 +18,6 @@ export function AdminMainpage() {
                 <nav className={styles.nav}>
                     <NavLink to="/admin" className={styles["nav-item"]} state={{ from: "/admin/admin-mainpage" }}>
                         Адміністративна панель
-                    </NavLink>
-                    <NavLink to="/admin-stats" className={styles["nav-item"]} state={{ from: "/admin/admin-mainpage" }}>
-                        Статистика
                     </NavLink>
                     <NavLink to="/admin-users" className={styles["nav-item"]} state={{ from: "/admin/admin-mainpage" }}>
                         Користувачі

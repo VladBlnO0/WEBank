@@ -1,4 +1,3 @@
-// UserRoute.js (for user-specific routes)
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 

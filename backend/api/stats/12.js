@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const db = require('../../db');
 
 router.get('/', (req, res) => {
     const sql = "SELECT COUNT(*) AS total_users FROM user.users WHERE role = 'user'";

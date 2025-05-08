@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
             if (results.length > 0) return res.status(400).json({ message: 'Користувач вже існує' });
 
             db.query(
-                'INSERT INTO users (username, email, phone, password) VALUES (?, ?, ?, ?)',
+                'INSERT INTO user.users (username, email, phone, password) VALUES (?, ?, ?, ?)',
                 [username, email, phone, password],
                 (err) => {
                     if (err) return res.status(500).json({ message: 'Пошта або Ім\'я вже заняті' });

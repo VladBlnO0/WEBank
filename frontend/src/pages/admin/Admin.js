@@ -39,7 +39,7 @@ export function Admin() {
         labels: stats.userStats.map(s => s.date),
         datasets: [
             {
-                label: 'New Users',
+                label: 'Нових клієнтів',
                 data: stats.userStats.map(s => s.count),
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 borderColor: 'rgba(54, 162, 235, 1)',
@@ -52,7 +52,7 @@ export function Admin() {
         labels: stats.transactionStats.map(s => s.date),
         datasets: [
             {
-                label: 'Transactions per Day',
+                label: 'Кількість транзакцій',
                 data: stats.transactionStats.map(s => s.count),
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
                 borderColor: 'rgba(255, 99, 132, 1)',
@@ -60,6 +60,7 @@ export function Admin() {
             },
         ],
     };
+
     if (!allowedFrom.includes(cameFrom)) {
         return <Navigate to="/404" replace />;
     }
@@ -85,7 +86,7 @@ export function Admin() {
             </aside>
             <main className={styles["main-content"]}>
                 <section className={styles.content}>
-                    <div className="text-xl font-bold h2 bg-white rounded p-4 shadow">Total Users: {stats.totalUsers}</div>
+                    <div className="text-xl font-bold h2 bg-white rounded p-4 shadow">Кількість клієнтів: {stats.totalUsers}</div>
 
                     <div className="bg-white rounded p-4 shadow" style={{ height: 400, width: '100%'}} >
                         <div style={{ maxWidth: '100%', height: '100%' }}>
@@ -96,7 +97,10 @@ export function Admin() {
                                 plugins: {
                                     title: {
                                         display: true,
-                                        text: 'User Growth This Week'
+                                        text: 'Кількість нових клієнтів',
+                                        font: {
+                                            size: 14
+                                        }
                                     },
                                     tooltip: {
                                         callbacks: {
@@ -105,6 +109,9 @@ export function Admin() {
                                                 return date.toLocaleDateString('uk-UA', { day: 'numeric', month: 'short', year: 'numeric' });
                                             }
                                         }
+                                    },
+                                    legend: {
+                                        display: false,
                                     }
                                 },
                                 scales: {
@@ -135,7 +142,10 @@ export function Admin() {
                                 plugins: {
                                     title: {
                                         display: true,
-                                        text: 'User Growth This Week'
+                                        text: 'Транзакції впродовж тижня',
+                                        font: {
+                                            size: 14
+                                        }
                                     },
                                     tooltip: {
                                         callbacks: {
@@ -144,6 +154,9 @@ export function Admin() {
                                                 return date.toLocaleDateString('uk-UA', { day: 'numeric', month: 'short', year: 'numeric' });
                                             }
                                         }
+                                    },
+                                    legend: {
+                                        display: false,
                                     }
                                 },
                                 scales: {
@@ -162,6 +175,7 @@ export function Admin() {
                                         }
                                     }
                                 }
+
                             }}  style={{ width: '100%', height: '100%' }}/>
                         </div>
                     </div>

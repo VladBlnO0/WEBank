@@ -56,31 +56,49 @@ export function AdminMainpage() {
             </aside>
             <main className={styles["main-content"]}>
                 <section className={styles.content}>
-                    <h3 className={styles["name-section"]}>Список користувачів</h3>
                     <table className={styles.table}>
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Ім'я</th>
+                                <th>Секція</th>
                                 <th>Дії</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
                                 <td>
-                                    <textarea value={intro} onChange={e => setIntro(e.target.value)} />
+                                    <Editor
+                                        apiKey="3cgdds5n90wh9p4ete23o5npe29ni2yw0k4c4xqhvy99v10z"
+                                        value={intro}
+                                        init={{
+                                            height: 300,
+                                            menubar: false,
+                                            plugins: 'link lists',
+                                            toolbar:
+                                                'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link',
+                                        }}
+                                        onEditorChange={(newValue) => setIntro(newValue)}
+                                    />
                                 </td>
-                                <td>
+                                    <td>
                                     <div className={styles.buttons}>
                                         <button className={styles.btn} type="button" onClick={() => updateSection('intro', intro)}>Зберегти</button>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
-                                <td>2</td>
                                 <td>
-                                    <textarea value={services} onChange={e => setServices(e.target.value)} />
+                                    <Editor
+                                        apiKey="3cgdds5n90wh9p4ete23o5npe29ni2yw0k4c4xqhvy99v10z"
+                                        value={services}
+                                        init={{
+                                            height: 300,
+                                            menubar: false,
+                                            plugins: 'link lists',
+                                            toolbar:
+                                                'undo redo | formatselect | bold italic | alignleft aligncenter alignright | bullist numlist | link',
+                                        }}
+                                        onEditorChange={(newValue) => setServices(newValue)}
+                                    />
                                 </td>
                                 <td>
                                     <div className={styles.buttons}>
@@ -89,10 +107,9 @@ export function AdminMainpage() {
                                 </td>
                             </tr>
                             <tr>
-                                <td>3</td>
                                 <td>
                                     <Editor
-                                        apiKey="no-api-key"
+                                        apiKey="3cgdds5n90wh9p4ete23o5npe29ni2yw0k4c4xqhvy99v10z"
                                         value={contact}
                                         init={{
                                             height: 300,

@@ -1,1 +1,2 @@
 // TODO reconsider RUN chown -R node:node /app/node_modules
+// TODO think to cut unused libraries

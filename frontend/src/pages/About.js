@@ -7,6 +7,15 @@ import './etc/footer.css'
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
 class About extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            intro: '',
+            services: '',
+            contact: ''
+        };
+    }
+
     componentDidMount() {
         fetch(`${API_BASE_URL}/api/content/about`)
             .then(res => res.json())
@@ -25,14 +34,15 @@ class About extends React.Component {
                     <p>Ваш фінансовий партнер для безпечного майбутнього</p>
                     <section id="about">
                         <h2>Про нас</h2>
-                        dangerouslySetInnerHTML={{ __html: this.state.intro }}                    </section>
+                        <div dangerouslySetInnerHTML={{ __html: this.state.intro }} />
+                    </section>
                     <p>Наші послуги:</p>
                     <section id="services">
-                        dangerouslySetInnerHTML={{ __html: this.state.services }}
+                        <div dangerouslySetInnerHTML={{ __html: this.state.services }} />
                     </section>
                     <section id="contact">
                         <h2>Зв'язок з нами</h2>
-                        dangerouslySetInnerHTML={{ __html: this.state.contact }}
+                        <div dangerouslySetInnerHTML={{ __html: this.state.contact }} />
                     </section>
                     <NavLink to="/" className={styles.btn}>
                         Повернутися на головну сторінку

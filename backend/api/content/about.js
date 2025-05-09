@@ -12,7 +12,7 @@ router.get('/about', (req, res) => {
             data[row.section_key] = row.content;
         });
 
-        res.json(data); // { intro: "...", services: "...", contact: "..." }
+        res.json(data);
     });
 });
 

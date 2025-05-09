@@ -1,11 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from 'react'
 import { NavLink, useLocation, Navigate } from "react-router-dom";
 import styles from "../css/Admin.module.css";
+
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
 export function AdminUsers() {
     const location = useLocation();
     const allowedFrom = ["/admin/admin-mainpage", "/admin/admin-users", "/sign-in", "/sign-up", "/admin"];
     const cameFrom = location.state?.from;
+
+    const [users, setUsers] = useState([]);
+    const [expanded, setExpanded] = useState(null);
+    const [transactions, setTransactions] = useState({});
+    const [senders, setSenders] = useState({});
+    const [receivers, setReceivers] = useState({});
+
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/api/users`)
+            .then(res => res.json())
+            .then(data => setUsers(data.users));
+    }, []);
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/api/finance/transactions/senders`)
+            .then(res => res.json())
+            .then(data => {
+                const senderMap = {};
+                for (const sender of data.senders) {
+                    senderMap[sender.id] = sender.username;
+                }
+            setSenders(senderMap);}
+            );
+    }, []);
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/api/finance/transactions/receivers`)
+            .then(res => res.json())
+            .then(data => {
+                const receiverMap = {};
+                for (const receiver of data.receivers) {
+                    receiverMap[receiver.id] = receiver.username;
+                }
+                setReceivers(receiverMap);}
+            );
+    }, []);
+
+    const toggle = (userId) => {
+        if (expanded === userId) {
+            setExpanded(null);
+            return;
+        }
+
+        setExpanded(userId);
+
+        if (!transactions[userId]) {
+            fetch(`${API_BASE_URL}/api/finance/transactions/user/${userId}`)
+                .then(res => res.json())
+                .then(data => {
+                    setTransactions(prev => ({ ...prev, [userId]: data.transactions }));
+                });
+        }
+    };
 
     if (!allowedFrom.includes(cameFrom)) {
         return <Navigate to="/404" replace />;
@@ -32,139 +85,42 @@ export function AdminUsers() {
             </aside>
             <main className={styles["main-content"]}>
                 <section className={styles.content}>
-                <h3 className={styles["name-section"]}>Іван Іваненко</h3>
-                <table className={styles.table}>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Операція</th>
-                        <th>Сума</th>
-                        <th>Остаточна сума</th>
-                        <th>Дата</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Переказ</td>
-                        <td>-500 грн</td>
-                        <td>9,500 грн</td>
-                        <td>03.03.2025</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Переказ</td>
-                        <td>-500 грн</td>
-                        <td>9,500 грн</td>
-                        <td>03.03.2025</td>
-                    </tr>
-                    </tbody>
-                </table>
 
-                <h3 className={styles["name-section"]}>Марія Петрівна</h3>
-                <table className={styles.table}>
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Операція</th>
-                        <th>Сума</th>
-                        <th>Остаточна сума</th>
-                        <th>Дата</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Переказ</td>
-                        <td>-500 грн</td>
-                        <td>9,000 грн</td>
-                        <td>03.03.2025</td>
-                    </tr>
-                    </tbody>
-                </table>
-
-                <h3 className={styles["name-section"]}>Петро Іванов</h3>
-                <table className={styles.table} id="petro-ivanov">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Операція</th>
-                        <th>Сума</th>
-                        <th>Остаточна сума</th>
-                        <th>Дата</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Переказ</td>
-                        <td>-500 грн</td>
-                        <td>6,500 грн</td>
-                        <td>03.03.2025</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </section>
-                <section className={styles.content}>
-                    <h3 className={styles["name-section"]}>Список користувачів</h3>
-                    <table className={styles.table}>
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Ім'я</th>
-                                <th>Баланс</th>
-                                <th>Операції</th>
-                                <th>Дії</th>
-                            </tr>
-                        </thead>
+                    <table className="table table-bordered">
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Іван Іваненко</td>
-                                <td>10,000 грн</td>
-                                <td>
-                                    <NavLink to="/admin-stats#ivan-ivanenko" className={styles.btn}>
-                                        Операції
-                                    </NavLink>
-                                </td>
-                                <td>
-                                    <button className={styles.btn} type="button">
-                                        Повідомити
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Марія Петрівна</td>
-                                <td>5,500 грн</td>
-                                <td>
-                                    <NavLink to="/admin-stats#maria-petrivna" className={styles.btn}>
-                                        Операції
-                                    </NavLink>
-                                </td>
-                                <td>
-                                    <button className={styles.btn} type="button">
-                                        Повідомити
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Петро Іванов</td>
-                                <td>7,000 грн</td>
-                                <td>
-                                    <NavLink to="/admin-stats#petro-ivanov" className={styles.btn}>
-                                        Операції
-                                    </NavLink>
-                                </td>
-                                <td>
-                                    <button className={styles.btn} type="button">
-                                        Повідомити
-                                    </button>
-                                </td>
-                            </tr>
+                        {users.map(user => (
+                            <React.Fragment key={user.id}>
+                                <tr onClick={() => toggle(user.id)} style={{ cursor: 'pointer' }}>
+                                    <td>{user.username}</td>
+                                </tr>
+                                {expanded === user.id && (
+                                    <tr>
+                                        <td colSpan="3">
+                                            <table className="table table-sm mb-0">
+                                                <thead>
+                                                <tr><th>Sender</th><th>Receiver</th><th>Amount</th><th>Date</th><th>Status</th><th>Description</th></tr>
+                                                </thead>
+                                                <tbody>
+                                                {(transactions[user.id] || []).map(tx => (
+                                                    <tr key={tx.id}>
+                                                        <td>{senders[tx.sender_id]}</td>
+                                                        <td>{receivers[tx.receiver_id]}</td>
+                                                        <td>{tx.amount}</td>
+                                                        <td>{new Date(tx.date).toLocaleDateString()}</td>
+                                                        <td>{tx.status}</td>
+                                                        <td>{tx.description}</td>
+                                                    </tr>
+                                                ))}
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                )}
+                            </React.Fragment>
+                        ))}
                         </tbody>
                     </table>
+
                 </section>
             </main>
         </div>

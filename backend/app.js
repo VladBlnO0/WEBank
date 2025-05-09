@@ -7,6 +7,10 @@ const loginRoute = require(path.join(__dirname, 'api', 'login'));
 const signupRoute = require(path.join(__dirname, 'api', 'signup'));
 const dashboardRoute = require(path.join(__dirname, 'api', 'stats', 'dashboard'));
 const contentRoute = require(path.join(__dirname, 'api', 'content', 'about'));
+const transRoute = require(path.join(__dirname, 'api', 'finance', 'transactions'));
+const userRoute = require(path.join(__dirname, 'api', 'users'));
+const senRoute = require(path.join(__dirname, 'api', 'finance', 'senders'));
+const recRoute = require(path.join(__dirname, 'api', 'finance', 'receivers'));
 
 const app = express();
 app.use(cors());
@@ -16,6 +20,10 @@ app.use('/api/login', loginRoute);
 app.use('/api/signup', signupRoute);
 app.use('/api/stats', dashboardRoute);
 app.use('/api/content', contentRoute);
+app.use('/api/finance/transactions', transRoute);
+app.use('/api/users', userRoute);
+app.use('/api/finance/transactions', senRoute);
+app.use('/api/finance/transactions', recRoute);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

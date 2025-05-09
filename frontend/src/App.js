@@ -1,6 +1,5 @@
 import NoPage from './pages/etc/NoPage'
 
-import Home from './pages/Home'
 import About from './pages/About'
 
 import SignIn from './pages/SignIn'
@@ -23,13 +22,12 @@ function App() {
                 <Routes>
                     <Route path="/404" element={<NoPage />} />
 
-                    <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
 
                     <Route path="/sign-in" element={<SignIn />} />
                     <Route path="/sign-up" element={<SignUp />} />
 
-                    <Route path="/user" element={<User />} />
+                    <Route path="/" element={<User />} />
                     <Route path="user-transfer" element={<UserTransfer />} />
                     <Route path="user-services" element={<UserServices />} />
 

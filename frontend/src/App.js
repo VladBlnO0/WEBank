@@ -1,3 +1,5 @@
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 import NoPage from './pages/etc/NoPage'
 
 import Home from './pages/Home'

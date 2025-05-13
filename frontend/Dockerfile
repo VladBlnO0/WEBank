@@ -8,6 +8,7 @@ RUN npm install
 RUN npm install react-router-dom react-bootstrap bootstrap-icons
 RUN npm install chart.js react-chartjs-2 chartjs-adapter-date-fns
 RUN npm install @tinymce/tinymce-react
+RUN npm install lucide-react
 
 ENV ESLINT_NO_CACHE=true
 

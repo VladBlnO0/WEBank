@@ -1,2 +1,4 @@
-// TODO think to cut unused libraries
+// TODO need to think about cutting unused libraries
 // TODO from "Pending" to "Paid"
+
+// TODO add services status and due data

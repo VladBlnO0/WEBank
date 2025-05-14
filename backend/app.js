@@ -12,6 +12,9 @@ const userRoute = require(path.join(__dirname, 'api', 'users'));
 const senRoute = require(path.join(__dirname, 'api', 'finance', 'senders'));
 const recRoute = require(path.join(__dirname, 'api', 'finance', 'receivers'));
 
+const balanceRoute = require(path.join(__dirname, 'api', 'user', 'balance'));
+const transactionsRoute = require(path.join(__dirname, 'api', 'user', 'transactions'));
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -24,6 +27,10 @@ app.use('/api/finance/transactions', transRoute);
 app.use('/api/users', userRoute);
 app.use('/api/finance/transactions', senRoute);
 app.use('/api/finance/transactions', recRoute);
+
+app.use('/api/user/', balanceRoute);
+app.use('/api/user/', transactionsRoute);
+
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(`Server running on port ${port}`));

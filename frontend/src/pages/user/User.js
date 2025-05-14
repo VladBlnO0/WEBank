@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Navigate, useLocation } from "react-router-dom";
 import styles from "../css/User.module.css";
 import { useAuth } from "../../contexts/AuthContext";
+
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
 export default function UserDashboard() {
     const location = useLocation();
@@ -12,18 +14,31 @@ export default function UserDashboard() {
         "/sign-up",
         "/user",
     ];
+
+    const [users, setUsers] = useState([]);
+    const [transactions, setTransactions] = useState([]);
+
+    const mainCard = users[0];
+
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/api/user/balance`)
+            .then((res) => res.json())
+            .then((data) => setUsers(data.userData));
+    }, []);
+
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/api/user/transactions?number=1234123412345234`)
+            .then((res) => res.json())
+            .then((data) => setTransactions(data.transactions));
+    }, []);
+
     const cameFrom = location.state?.from;
+
     const { logout } = useAuth();
 
     if (!allowedFrom.includes(cameFrom)) {
         return <Navigate to="/404" replace />;
     }
-
-    const transactions = [
-        { id: 1, label: "ЖКГ", date: "May 7, 2025", amount: -5.0 },
-        { id: 2, label: "Зарплатня", date: "May 1, 2025", amount: 1980.0 },
-        { id: 3, label: "Переказ", date: "April 29, 2025", amount: -50.0 },
-    ];
 
     return (
         <div
@@ -77,9 +92,20 @@ export default function UserDashboard() {
                     >
                         <div className="d-flex justify-content-between align-items-start">
                             <div>
-                                <div className="text-muted">Головна картка</div>
-                                <div className="fs-3 fw-bold">$11,111.00</div>
-                                <div className="text-muted small">**** **** **** 1111</div>
+                                {mainCard && (
+                                    <>
+                                        <div className="text-muted">Головна картка</div>
+                                        <div className="fs-3 fw-bold">
+                                            {new Intl.NumberFormat("en-US", {
+                                                style: "currency",
+                                                currency: "USD",
+                                            }).format(Number(users[0].balance))}
+                                        </div>
+                                        <div className="text-muted small">
+                                            **** **** **** {users[0].number.slice(-4)}
+                                        </div>
+                                    </>
+                                )}
                             </div>
                             <i className="bi bi-credit-card text-muted fs-5"></i>
                         </div>
@@ -92,14 +118,44 @@ export default function UserDashboard() {
                                     key={tx.id}
                                     className="d-flex justify-content-between align-items-center bg-light p-3 rounded border"
                                 >
-                                    <div>
-                                        <div className="fw-medium">{tx.label}</div>
-                                        <div className="text-muted small">{tx.date}</div>
-                                    </div>
-                                    <div
-                                        className={`fw-bold ${tx.amount < 0 ? "text-danger" : "text-success"}`}
-                                    >
-                                        {tx.amount > 0 ? "+" : "-"}${Math.abs(tx.amount).toFixed(2)}
+                                    <div className="w-100">
+                                        {/* Top row: label + badge + date */}
+                                        <div className="d-flex justify-content-between align-items-center mb-2">
+                                            <div className="fw-medium">
+                                                {tx.label}
+                                                <span className={`badge ms-2 text-uppercase ${
+                                                        tx.type === 'send'
+                                                            ? 'bg-danger'
+                                                            : tx.type === 'receive'
+                                                                ? 'bg-success'
+                                                                : 'bg-primary'
+                                                    }`}>
+                                              {tx.type}
+                                            </span>
+                                            </div>
+                                            <div className="text-muted small">
+                                                {new Date(tx.date).toLocaleDateString()}
+                                            </div>
+                                        </div>
+
+                                        {/* Description line */}
+                                        {tx.description && (
+                                            <div className="text-muted small mb-1">{tx.description}</div>
+                                        )}
+
+                                        {/* Status (used as masked card info) */}
+                                        {tx.status && (
+                                            <div className="text-muted small mb-2">{tx.status}</div>
+                                        )}
+
+                                        {/* Amount, right aligned */}
+                                        <div
+                                            className={`fw-bold text-end ${
+                                                tx.amount < 0 ? 'text-danger' : 'text-success'
+                                            }`}
+                                        >
+                                            {tx.amount > 0 ? '+' : '-'}${Math.abs(tx.amount).toFixed(2)}
+                                        </div>
                                     </div>
                                 </div>
                             ))}

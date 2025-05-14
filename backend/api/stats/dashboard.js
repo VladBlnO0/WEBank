@@ -4,13 +4,14 @@ const db = require('../../db');
 
 router.get('/dashboard', async (req, res) => {
     const userSql = `
-    SELECT COUNT(*) as totalUsers FROM user.users;
+    SELECT COUNT(*) as totalUsers FROM user.users
+    WHERE NOT users.role = 'admin';
   `;
 
     const userStatsSql = `
     SELECT DATE(created_at) as date, COUNT(*) as count
     FROM user.users
-    WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 6 DAY)
+    WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 6 DAY) AND NOT users.role = 'admin'
     GROUP BY DATE(created_at)
     ORDER BY date;
   `;

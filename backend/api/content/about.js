@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../../db');
 
-// GET all sections
 router.get('/about', (req, res) => {
     db.query('SELECT section_key, content FROM admin.page', (err, results) => {
         if (err) return res.status(500).json({ message: 'DB error' });
@@ -16,7 +15,6 @@ router.get('/about', (req, res) => {
     });
 });
 
-// PUT update a section
 router.put('/about/:section', (req, res) => {
     const { section } = req.params;
     const { content } = req.body;

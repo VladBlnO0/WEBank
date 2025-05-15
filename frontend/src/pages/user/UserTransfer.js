@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from 'react'
 import { NavLink, Navigate, useLocation } from "react-router-dom";
 import styles from "../css/User.module.css";
 import { useAuth } from "../../contexts/AuthContext";
 import { useState } from "react";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Modal, Button } from 'react-bootstrap';
+import { alerts } from '../components/alerts'
+
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
 export default function UserTransfer() {
     const location = useLocation();
@@ -11,24 +17,120 @@ export default function UserTransfer() {
     const { logout } = useAuth();
 
     const [card, setCard] = useState("");
-    const [amount, setAmount] = useState(0.0);
+    const [amount, setAmount] = useState("");
     const [description, setDescription] = useState("");
+
+    const [showCardTooltip, setShowCardTooltip] = useState(false);
+    const [showAmountTooltip, setShowAmountTooltip] = useState(false);
+
+    const [showModal, setShowModal] = useState(false);
+
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/api/user/balance?number=1`)
+            .then((res) => res.json())
+            .then((data) => setUser(data.userData));
+    }, []);
 
     if (!allowedFrom.includes(cameFrom)) {
         return <Navigate to="/404" replace />;
     }
 
+    const handleCardSize = (e) => {
+        e.preventDefault();
+
+        const raw = e.target.value;
+        setCard(raw);
+
+        const clean = raw.replace(/\D/g, '');
+
+        if (clean.length < 16) {
+            setShowCardTooltip(true);
+            return;
+        }
+
+        const formatted = formatCard(clean);
+        setCard(formatted);
+        setShowCardTooltip(false);
+    };
+    const formatCard = (value) => {
+        return value
+            .replace(/\D/g, '')
+            .replace(/(.{4})/g, '$1 ')
+            .trim();
+    };
+    const handleCardChange = (e) => {
+        e.preventDefault();
+
+        const rawValue = e.target.value;
+        const formatted = formatCard(rawValue);
+        setCard(formatted);
+    };
+
     const handleAmountChange = (e) => {
-        const value = parseFloat(e.target.value);
-        if (!isNaN(value) && value >= 0 && value <= 100001) {
-            setAmount(value);
+        const raw = e.target.value;
+        if (raw === "") {
+            setAmount("");
+            return;
+        }
+
+        const match = raw.match(/^\d*\.?\d{0,2}$/);
+        if (match && raw <= 100001) {
+            setAmount(raw);
         }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Transfer submitted:", { card, amount, description });
+
+        const amountDB = parseFloat(amount);
+        const cardNumberForDB = card.replace(/\s/g, '');
+
+        if (isNaN(amountDB) || amountDB <= 0) {
+            setShowAmountTooltip(true);
+            return;
+        }
+        if (cardNumberForDB.length !== 16) {
+            setShowCardTooltip(true);
+            return;
+        }
+
+        setShowModal(true);
     };
+
+    const confirmTransfer = async () => {
+        const senderCard = user[0]?.number;
+
+        const payload = {
+            card: card.replace(/\D/g, ''), // receiver card number
+            senderAccountNumber: senderCard?.replace(/\D/g, ''),
+            amount: parseFloat(amount),
+            description,
+        };
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/user/sending`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message);
+            }
+
+            const result = await response.json();
+            console.log("Confirmed transfer:", result.message);
+            setShowModal(false);
+            // Optional: show success toast or reload balance
+        } catch (error) {
+            console.error("Transfer failed:", error.message);
+            // Optional: show error alert
+        }
+    };
+
 
     return (
         <div
@@ -76,6 +178,27 @@ export default function UserTransfer() {
                 </aside>
 
                 <main className="flex-grow-1 p-4 d-flex justify-content-center align-items-center">
+                    <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Підтвердження переказу</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <p>
+                                Ви впевнені, що хочете надіслати <strong>${amount}</strong>
+                            </p>
+                            <p>
+                                На картку {card}?
+                            </p>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShowModal(false)}>
+                                Скасувати
+                            </Button>
+                            <Button variant="primary" onClick={confirmTransfer}>
+                                Підтвердити
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
                     <form
                         className="card p-4 shadow w-100"
                         style={{ maxWidth: 700 }}
@@ -87,14 +210,25 @@ export default function UserTransfer() {
                             <label className="form-label">Номер картки</label>
                             <div className="input-group">
                                 <input
-                                    type="text"
+                                    type="tel"
+                                    inputMode="numeric"
                                     className="form-control"
                                     placeholder="XXXX XXXX XXXX XXXX"
-                                    maxLength="20"
+                                    maxLength="19"
                                     required
+
                                     value={card}
-                                    onChange={(e) => setCard(e.target.value)}
+                                    onChange={handleCardChange}
+                                    onMouseEnter={() => setShowCardTooltip(true)}
+                                    onMouseLeave={() => setShowCardTooltip(false)}
+                                    onFocus={() => setShowCardTooltip(true)}
+                                    onBlur={() => setShowCardTooltip(false)}
                                 />
+                                {showCardTooltip && (
+                                    <div className="position-absolute top-100 mt-1 bg-light border p-2 rounded shadow-sm small">
+                                        Please enter your card number (16 digits)
+                                    </div>
+                                )}
                                 <span className="input-group-text">
                   <i className="bi bi-credit-card"></i>
                 </span>
@@ -109,11 +243,26 @@ export default function UserTransfer() {
                                     type="number"
                                     className="form-control"
                                     placeholder="0.00"
-                                    step="any"
+                                    step="1"
                                     required
                                     value={amount}
                                     onChange={handleAmountChange}
+                                    onBlur={() => {
+                                        if (amount !== "") {
+                                            setAmount(Number(amount).toFixed(2));
+                                        }
+                                        setShowAmountTooltip(false)
+                                    }}
+
+                                    onMouseEnter={() => setShowAmountTooltip(true)}
+                                    onMouseLeave={() => setShowAmountTooltip(false)}
+                                    onFocus={() => setShowAmountTooltip(true)}
                                 />
+                                {showAmountTooltip && (
+                                    <div className="position-absolute top-100 mt-1 bg-light border p-2 rounded shadow-sm small">
+                                        Please enter amount you wish to send (100.000)
+                                    </div>
+                                )}
                             </div>
                         </div>
 

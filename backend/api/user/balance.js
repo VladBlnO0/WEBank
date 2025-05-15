@@ -3,10 +3,14 @@ const router = express.Router();
 const db = require("../../db");
 
 router.get("/balance", async (req, res) => {
+    const accountNumber = req.query.number;
+    if (!accountNumber) {
+        return res.status(400).json({ message: 'Missing account' });
+    }
+
     const userDataSql = `
         SELECT *
         FROM user.accounts
-        WHERE accounts.id = '1'
     `;
 
     try {

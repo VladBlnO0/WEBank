@@ -14,6 +14,7 @@ const recRoute = require(path.join(__dirname, 'api', 'finance', 'receivers'));
 
 const balanceRoute = require(path.join(__dirname, 'api', 'user', 'balance'));
 const transactionsRoute = require(path.join(__dirname, 'api', 'user', 'transactions'));
+const sendingRoute = require(path.join(__dirname, 'api', 'user', 'sending'));
 
 const app = express();
 app.use(cors());
@@ -30,6 +31,7 @@ app.use('/api/finance/transactions', recRoute);
 
 app.use('/api/user/', balanceRoute);
 app.use('/api/user/', transactionsRoute);
+app.use('/api/user/', sendingRoute);
 
 
 const port = process.env.PORT || 4000;

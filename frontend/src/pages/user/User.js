@@ -21,7 +21,7 @@ export default function UserDashboard() {
     const mainCard = users[0];
 
     useEffect(() => {
-        fetch(`${API_BASE_URL}/api/user/balance`)
+        fetch(`${API_BASE_URL}/api/user/balance?number=1`)
             .then((res) => res.json())
             .then((data) => setUsers(data.userData));
     }, []);
@@ -124,9 +124,9 @@ export default function UserDashboard() {
                                             <div className="fw-medium">
                                                 {tx.label}
                                                 <span className={`badge ms-2 text-uppercase ${
-                                                        tx.type === 'send'
+                                                        tx.type === 'sent'
                                                             ? 'bg-danger'
-                                                            : tx.type === 'receive'
+                                                            : tx.type === 'received'
                                                                 ? 'bg-success'
                                                                 : 'bg-primary'
                                                     }`}>

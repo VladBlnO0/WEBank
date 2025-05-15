@@ -15,8 +15,9 @@ router.get('/transactions', (req, res) => {
                t.receiver_id,
                t.amount,
                t.date,
+               t.description,
                r.number AS receiver_number,
-               'send' AS type
+               'sent' AS type
         FROM finance.transactions t
                  JOIN user.accounts a ON t.sender_id = a.id
                  JOIN user.accounts r ON t.receiver_id = r.id
@@ -29,8 +30,9 @@ router.get('/transactions', (req, res) => {
                t.sender_id, 
                t.receiver_id, 
                t.amount, 
-               t.date, 
-               'receive' AS type,
+               t.date,
+               t.description,
+               'received' AS type,
                s.number AS sender_number
         FROM finance.transactions t
                  JOIN user.accounts a ON t.receiver_id = a.id
@@ -55,10 +57,10 @@ router.get('/transactions', (req, res) => {
 
     try {
         db.query(sqlSend, [accountNumber], (err1, sendResults) => {
-            if (err1) return res.status(500).json({ message: 'Send query error' });
+            if (err1) return res.status(500).json({ message: 'Sent query error' });
 
             db.query(sqlReceive, [accountNumber], (err2, receiveResults) => {
-                if (err2) return res.status(500).json({ message: 'Receive query error' });
+                if (err2) return res.status(500).json({ message: 'Received query error' });
 
                 db.query(sqlPayment, [accountNumber], (err3, paymentResults) => {
                     if (err3) return res.status(500).json({ message: 'Payment query error' });
@@ -68,9 +70,9 @@ router.get('/transactions', (req, res) => {
                         date: tx.date,
                         amount: -tx.amount,
                         description: tx.description || '',
-                        status: `To card ****${tx.receiver_number?.slice(-4)}`,
-                        label: 'Sent to another account',
-                        type: 'send'
+                        status: `На картку ****${tx.receiver_number?.slice(-4)}`,
+                        label: 'Переказ на картку',
+                        type: 'sent'
                     }));
 
                     const received = receiveResults.map(tx => ({
@@ -78,17 +80,17 @@ router.get('/transactions', (req, res) => {
                         date: tx.date,
                         amount: tx.amount,
                         description: tx.description || '',
-                        status: `From card ****${tx.sender_number?.slice(-4)}`,
-                        label: 'Received from another account',
-                        type: 'receive'
+                        status: `З картки ****${tx.sender_number?.slice(-4)}`,
+                        label: 'Отримано з картки',
+                        type: 'received'
                     }));
 
                     const payment = paymentResults.map(p => ({
                         id: p.id,
                         date: p.date,
                         amount: -p.amount,
-                        description: `Service #${p.service_name}`,
-                        label: 'Service payment',
+                        description: `Послуга #${p.service_name}`,
+                        label: 'Оплата послуги',
                         type: 'payment'
                     }));
 

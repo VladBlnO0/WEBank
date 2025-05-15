@@ -96,7 +96,7 @@ router.get('/transactions', (req, res) => {
 
                     const combined = [...send, ...received, ...payment]
                         .sort((a, b) => new Date(b.date) - new Date(a.date))
-                        .slice(0, 3);
+                        .slice(0, 500);
 
                     res.json({ transactions: combined });
                 });

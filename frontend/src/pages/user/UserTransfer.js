@@ -37,36 +37,11 @@ export default function UserTransfer() {
     }, []);
 
     const userBalance = parseFloat(user[0]?.balance ?? 0);
-    const cardNumberDB = parseInt(user[0]?.number ?? 0);
-
-    useEffect(() => {
-        if (showToast) {
-            const timer = setTimeout(() => {setShowToast(false);}, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, [showToast]);
+    const newBalance = userBalance - parseFloat(amount);
 
     if (!allowedFrom.includes(cameFrom)) {
         return <Navigate to="/404" replace />;
     }
-
-    // const handleCardSize = (e) => {
-    //     e.preventDefault();
-    //
-    //     const raw = e.target.value;
-    //     setCard(raw);
-    //
-    //     const clean = raw.replace(/\D/g, '');
-    //
-    //     if (clean.length < 16) {
-    //         setShowCardTooltip(true);
-    //         return;
-    //     }
-    //
-    //     const formatted = formatCard(clean);
-    //     setCard(formatted);
-    //     setShowCardTooltip(false);
-    // };
 
     const formatCard = (value) => {
         return value
@@ -95,22 +70,32 @@ export default function UserTransfer() {
         }
     };
 
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const amountDB = parseFloat(amount);
-        const cardNumberForDB = card.replace(/\s/g, '');
+        const userBalance = parseFloat(user[0]?.balance ?? 0);
+        const senderCard = user[0]?.number;
 
-        if (cardNumberDB.length < 1) {
+        const amountDB = parseFloat(amount);
+
+        const cardNumberForDB = card.replace(/\s/g, '');
+        const cardNumberDB = senderCard?.replace(/\D/g, '') ?? '';
+
+
+        if (!cardNumberForDB || cardNumberForDB.length !== 16) {
+            if (cardNumberForDB.length !== 16) {
+                setShowCardTooltip(true);
+                return;
+            }
+        }
+        if (cardNumberDB === cardNumberForDB) {
             setToastMsg({
                 heading: "Помилка",
-                content: "Неіснуюча картка",
+                content: "Неможливо надіслати кошти на власну картку",
             });
             setShowToast(true);
+            return;
         }
-
         if (isNaN(amountDB) || amountDB <= 0) {
             setShowAmountTooltip(true);
             return;
@@ -125,19 +110,11 @@ export default function UserTransfer() {
             return;
         }
 
-        if (cardNumberForDB.length !== 16) {
-            setShowCardTooltip(true);
-            return;
-        }
-
         setShowModal(true);
     };
 
-    const newBalance = userBalance - parseFloat(amount);
-
     const confirmTransfer = async () => {
         const senderCard = user[0]?.number;
-
         const payload = {
             card: card.replace(/\D/g, ''), // receiver card number
             senderAccountNumber: senderCard?.replace(/\D/g, ''),
@@ -172,7 +149,7 @@ export default function UserTransfer() {
 
             setToastMsg({
                 heading: "Помилка",
-                content: "Не вдалося виконати транзакцію",
+                content: error.message || "Не вдалося виконати транзакцію",
             });
             setShowToast(true);
         }
@@ -254,7 +231,11 @@ export default function UserTransfer() {
                         position={'middle-center'}
                         style={{ zIndex: 1 }}
                     >
-                        <Toast show={showToast}>
+                        <Toast onClose={() => setShowToast(false)}
+                               show={showToast}
+                               delay={3000}
+                               autohide
+                               style={{ backgroundColor: '#fff' }}>
                             <Toast.Header>
                                 <strong className="me-auto">{ToastMsg.heading}</strong>
                             </Toast.Header>
@@ -324,7 +305,7 @@ export default function UserTransfer() {
                                 />
                                 {showAmountTooltip && (
                                     <div className="position-absolute top-100 mt-1 bg-light border p-2 rounded shadow-sm small">
-                                        Please enter amount you wish to send (100.000)
+                                        Please enter amount you wish to send
                                     </div>
                                 )}
                             </div>

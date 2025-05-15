@@ -20,6 +20,7 @@ export function AdminUsers() {
             .then(res => res.json())
             .then(data => setUsers(data.users));
     }, []);
+
     useEffect(() => {
         fetch(`${API_BASE_URL}/api/finance/transactions/senders`)
             .then(res => res.json())
@@ -31,6 +32,7 @@ export function AdminUsers() {
             setSenders(senderMap);}
             );
     }, []);
+
     useEffect(() => {
         fetch(`${API_BASE_URL}/api/finance/transactions/receivers`)
             .then(res => res.json())

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react'
 import { NavLink, Navigate, useLocation } from "react-router-dom";
 import styles from "../css/User.module.css";
 import { useAuth } from "../../contexts/AuthContext";
@@ -14,6 +14,20 @@ export default function UserDashboard() {
         "/sign-up",
         "/user",
     ];
+
+    const [showCardNumberTooltip, setShowCardNumberTooltip] = useState(false);
+    const hoverTimeout = useRef(null);
+
+    const handleMouseEnter = () => {
+        clearTimeout(hoverTimeout.current);
+        setShowCardNumberTooltip(true);
+    };
+
+    const handleMouseLeave = () => {
+        hoverTimeout.current = setTimeout(() => {
+            setShowCardNumberTooltip(false);
+        }, 1000);
+    };
 
     const [users, setUsers] = useState([]);
     const [transactions, setTransactions] = useState([]);
@@ -35,6 +49,13 @@ export default function UserDashboard() {
     const cameFrom = location.state?.from;
 
     const { logout } = useAuth();
+
+    const formatCard = (value) => {
+        return value
+            .replace(/\D/g, '')
+            .replace(/(.{4})/g, '$1 ')
+            .trim();
+    };
 
     if (!allowedFrom.includes(cameFrom)) {
         return <Navigate to="/404" replace />;
@@ -101,8 +122,22 @@ export default function UserDashboard() {
                                                 currency: "USD",
                                             }).format(Number(users[0].balance))}
                                         </div>
-                                        <div className="text-muted small">
+                                        <div className="text-muted small position-relative"
+                                             onMouseEnter={handleMouseEnter}
+                                             onMouseLeave={handleMouseLeave}
+                                        >
                                             **** **** **** {users[0].number.slice(-4)}
+
+                                            {showCardNumberTooltip && (
+                                                <div
+                                                    className="position-absolute z-1 top-100 mt-1 fs-6 bg-light border p-2 rounded shadow-sm small"
+                                                    style={{ minWidth: '160px', whiteSpace: 'nowrap' }}
+                                                    onMouseEnter={handleMouseEnter}
+                                                    onMouseLeave={handleMouseLeave}
+                                                >
+                                                    {formatCard(users[0].number)}
+                                                </div>
+                                            )}
                                         </div>
                                     </>
                                 )}
@@ -112,14 +147,13 @@ export default function UserDashboard() {
                     </div>
                     <div className="card p-4">
                         <h2 className="fs-5 fw-semibold mb-3">Транзакції</h2>
-                        <div className="vstack gap-3">
+                        <div className="vstack gap-3 overflow-auto" style={{ maxHeight: '400px', paddingRight: '6px' }}>
                             {transactions.map((tx) => (
                                 <div
                                     key={tx.id}
                                     className="d-flex justify-content-between align-items-center bg-light p-3 rounded border"
                                 >
                                     <div className="w-100">
-                                        {/* Top row: label + badge + date */}
                                         <div className="d-flex justify-content-between align-items-center mb-2">
                                             <div className="fw-medium">
                                                 {tx.label}
@@ -138,17 +172,14 @@ export default function UserDashboard() {
                                             </div>
                                         </div>
 
-                                        {/* Description line */}
                                         {tx.description && (
                                             <div className="text-muted small mb-1">{tx.description}</div>
                                         )}
 
-                                        {/* Status (used as masked card info) */}
                                         {tx.status && (
                                             <div className="text-muted small mb-2">{tx.status}</div>
                                         )}
 
-                                        {/* Amount, right aligned */}
                                         <div
                                             className={`fw-bold text-end ${
                                                 tx.amount < 0 ? 'text-danger' : 'text-success'

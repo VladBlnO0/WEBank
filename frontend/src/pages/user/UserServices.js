@@ -1,66 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from 'react'
 import { Navigate, NavLink, useLocation } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "../css/User.module.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
+
 export default function PaymentPage() {
-    const [selected, setSelected] = useState([]);
 
     const location = useLocation();
     const allowedFrom = ["/user-transfer", "/user-services", "/user"];
     const cameFrom = location.state?.from;
     const { logout } = useAuth();
 
+
+    const [services, setServices] = useState([]);
+    const [selected, setSelected] = useState([]);
+
+    useEffect(() => {
+        fetch(`${API_BASE_URL}/api/content/services`)
+            .then((res) => res.json())
+            .then((data) => setServices(data.servicesData));
+    }, []);
+
     if (!allowedFrom.includes(cameFrom)) {
         return <Navigate to="/404" replace />;
     }
 
-    const services = [
-        {
-            id: 1,
-            name: "ЖКГ",
-            icon: "bi bi-lightning",
-            provider: "PowerCo",
-            due: "May 7, 2025",
-            amount: 7.07,
-        },
-        {
-            id: 2,
-            name: "ЖКГ",
-            icon: "bi bi-droplet",
-            provider: "PowerCo",
-            due: "May 7, 2025",
-            amount: 7.07,
-        },
-        {
-            id: 3,
-            name: "ЖКГ",
-            icon: "bi bi-fire",
-            provider: "PowerCo",
-            due: "May 7, 2025",
-            amount: 7.07,
-        },
-    ];
-
     const allIds = services.map((service) => service.id);
     const isAllSelected = selected.length === allIds.length && allIds.length > 0;
+
     const handleSelectAll = () => {
-        if (isAllSelected) {
-            setSelected([]);
-        } else {
-            setSelected(allIds);
-        }
+        setSelected(isAllSelected ? [] : allIds);
     };
 
     const toggleService = (id) => {
         setSelected((prev) =>
-            prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id],
+            prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id],
         );
     };
 
     const total = selected.reduce((sum, id) => {
         const item = services.find((s) => s.id === id);
-        return item ? sum + item.amount : sum;
+        return item ? sum + parseFloat(item.tariff) : sum;
     }, 0);
 
     return (
@@ -122,7 +103,6 @@ export default function PaymentPage() {
                                 </th>
                                 <th>Послуга</th>
                                 <th>Провідник</th>
-                                <th>Оплатити до</th>
                                 <th>Сума</th>
                                 <th>Статус</th>
                             </tr>
@@ -141,8 +121,7 @@ export default function PaymentPage() {
                                         <i className={`${service.icon} me-2`}></i> {service.name}
                                     </td>
                                     <td>{service.provider}</td>
-                                    <td>{service.due}</td>
-                                    <td>${service.amount.toFixed(2)}</td>
+                                    <td>${service.tariff}</td>
                                     <td>
                                         <span className="badge bg-secondary">Pending</span>
                                     </td>
@@ -160,7 +139,7 @@ export default function PaymentPage() {
                         </div>
                         <div className="d-flex justify-content-between">
                             <span>Total Amount:</span>
-                            <span>${total.toFixed(2)}</span>
+                            <span>${total}</span>
                         </div>
                         <div className="border-top my-3"></div>
 

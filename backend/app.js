@@ -14,7 +14,11 @@ const recRoute = require(path.join(__dirname, 'api', 'finance', 'receivers'));
 
 const balanceRoute = require(path.join(__dirname, 'api', 'user', 'balance'));
 const transactionsRoute = require(path.join(__dirname, 'api', 'user', 'transactions'));
+
 const sendingRoute = require(path.join(__dirname, 'api', 'user', 'sending'));
+
+const servicesRoute = require(path.join(__dirname, 'api', 'content', 'services'));
+// const paymentsRoute = require(path.join(__dirname, 'api', 'user', 'payments'));
 
 const app = express();
 app.use(cors());
@@ -32,6 +36,8 @@ app.use('/api/finance/transactions', recRoute);
 app.use('/api/user/', balanceRoute);
 app.use('/api/user/', transactionsRoute);
 app.use('/api/user/', sendingRoute);
+app.use('/api/content/', servicesRoute);
+// app.use('/api/user/', paymentsRoute);
 
 
 const port = process.env.PORT || 4000;

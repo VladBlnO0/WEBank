@@ -5,8 +5,8 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useState } from "react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button } from 'react-bootstrap';
-import { alerts } from '../components/alerts'
+import { Modal, Button, Toast, ToastContainer} from 'react-bootstrap';
+
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
@@ -25,6 +25,9 @@ export default function UserTransfer() {
 
     const [showModal, setShowModal] = useState(false);
 
+    const [showToast, setShowToast] = useState(false);
+    const [ToastMsg, setToastMsg] = useState({ heading: '', content: null });
+
     const [user, setUser] = useState([]);
 
     useEffect(() => {
@@ -33,27 +36,38 @@ export default function UserTransfer() {
             .then((data) => setUser(data.userData));
     }, []);
 
+    const userBalance = parseFloat(user[0]?.balance ?? 0);
+    const cardNumberDB = parseInt(user[0]?.number ?? 0);
+
+    useEffect(() => {
+        if (showToast) {
+            const timer = setTimeout(() => {setShowToast(false);}, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [showToast]);
+
     if (!allowedFrom.includes(cameFrom)) {
         return <Navigate to="/404" replace />;
     }
 
-    const handleCardSize = (e) => {
-        e.preventDefault();
+    // const handleCardSize = (e) => {
+    //     e.preventDefault();
+    //
+    //     const raw = e.target.value;
+    //     setCard(raw);
+    //
+    //     const clean = raw.replace(/\D/g, '');
+    //
+    //     if (clean.length < 16) {
+    //         setShowCardTooltip(true);
+    //         return;
+    //     }
+    //
+    //     const formatted = formatCard(clean);
+    //     setCard(formatted);
+    //     setShowCardTooltip(false);
+    // };
 
-        const raw = e.target.value;
-        setCard(raw);
-
-        const clean = raw.replace(/\D/g, '');
-
-        if (clean.length < 16) {
-            setShowCardTooltip(true);
-            return;
-        }
-
-        const formatted = formatCard(clean);
-        setCard(formatted);
-        setShowCardTooltip(false);
-    };
     const formatCard = (value) => {
         return value
             .replace(/\D/g, '')
@@ -81,16 +95,36 @@ export default function UserTransfer() {
         }
     };
 
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
         const amountDB = parseFloat(amount);
         const cardNumberForDB = card.replace(/\s/g, '');
 
+        if (cardNumberDB.length < 1) {
+            setToastMsg({
+                heading: "Помилка",
+                content: "Неіснуюча картка",
+            });
+            setShowToast(true);
+        }
+
         if (isNaN(amountDB) || amountDB <= 0) {
             setShowAmountTooltip(true);
             return;
         }
+
+        if (amountDB > userBalance) {
+            setToastMsg({
+                heading: "Помилка",
+                content: "Недостатньо коштів на рахунку.",
+            });
+            setShowToast(true);
+            return;
+        }
+
         if (cardNumberForDB.length !== 16) {
             setShowCardTooltip(true);
             return;
@@ -98,6 +132,8 @@ export default function UserTransfer() {
 
         setShowModal(true);
     };
+
+    const newBalance = userBalance - parseFloat(amount);
 
     const confirmTransfer = async () => {
         const senderCard = user[0]?.number;
@@ -124,10 +160,21 @@ export default function UserTransfer() {
             const result = await response.json();
             console.log("Confirmed transfer:", result.message);
             setShowModal(false);
-            // Optional: show success toast or reload balance
+
+            setToastMsg({
+                heading: "Переказ підтверджено",
+                content: "Кошти успішно надіслано!",
+            });
+            setShowToast(true)
+
         } catch (error) {
             console.error("Transfer failed:", error.message);
-            // Optional: show error alert
+
+            setToastMsg({
+                heading: "Помилка",
+                content: "Не вдалося виконати транзакцію",
+            });
+            setShowToast(true);
         }
     };
 
@@ -189,6 +236,9 @@ export default function UserTransfer() {
                             <p>
                                 На картку {card}?
                             </p>
+                            <p>
+                                Баланс після переказу: ${newBalance.toFixed(2)}
+                            </p>
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={() => setShowModal(false)}>
@@ -199,6 +249,20 @@ export default function UserTransfer() {
                             </Button>
                         </Modal.Footer>
                     </Modal>
+                    <ToastContainer
+                        className="p-3"
+                        position={'middle-center'}
+                        style={{ zIndex: 1 }}
+                    >
+                        <Toast show={showToast}>
+                            <Toast.Header>
+                                <strong className="me-auto">{ToastMsg.heading}</strong>
+                            </Toast.Header>
+                            <Toast.Body>
+                                {ToastMsg.content}
+                            </Toast.Body>
+                        </Toast>
+                    </ToastContainer>
                     <form
                         className="card p-4 shadow w-100"
                         style={{ maxWidth: 700 }}
@@ -272,7 +336,7 @@ export default function UserTransfer() {
                                 className={styles.transfer_form}
                                 placeholder="What's this transfer for?"
                                 rows="3"
-                                maxLength="150"
+                                maxLength="40"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             ></textarea>

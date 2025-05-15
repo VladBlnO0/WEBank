@@ -36,11 +36,33 @@ router.post('/sending', async (req, res) => {
                                     console.error('Insert error:', err3);
                                     return res.status(500).json({ message: 'Transaction failed' });
                                 }
-                                res.status(201).json({ message: 'Transaction successful' });
+
+                                db.query(
+                                    'UPDATE user.accounts SET balance = balance - ? WHERE id = ?',
+                                    [amount, senderId],
+                                    (err4) => {
+                                        if (err4) {
+                                            console.error('Sender balance update error:', err4);
+                                            return res.status(500).json({ message: 'Failed to update sender balance' });
+                                        }
+                                        db.query(
+                                            'UPDATE user.accounts SET balance = balance + ? WHERE id = ?',
+                                            [amount, receiverId],
+                                            (err5) => {
+                                                if (err5) {
+                                                    console.error('Receiver balance update error:', err5);
+                                                    return res.status(500).json({ message: 'Failed to update receiver balance' });
+                                                }
+                                                res.status(201).json({ message: 'Transaction completed successfully' });
+                                            }
+                                        );
+                                    }
+                                );
                             }
                         );
                     }
                 );
+
             }
         );
     } catch (error) {

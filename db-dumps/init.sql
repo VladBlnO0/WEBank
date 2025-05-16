@@ -32,32 +32,34 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `user` /*!40100 DEFAULT CHARACTER SET u
 USE `user`;
 
 --
--- Table structure for table `account`
+-- Table structure for table `accounts`
 --
 
-DROP TABLE IF EXISTS `account`;
+DROP TABLE IF EXISTS `accounts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `account` (
+CREATE TABLE `accounts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `number` varchar(255) NOT NULL,
   `balance` decimal(10,2) NOT NULL,
-  `type` varchar(255) NOT NULL,
-  `currency` char(3) NOT NULL,
+  `type` enum('debit','credit') NOT NULL DEFAULT 'debit',
+  `currency` char(3) DEFAULT 'USD',
   `created_at` timestamp NOT NULL DEFAULT (now()),
   PRIMARY KEY (`id`),
+  UNIQUE KEY `number_pk` (`number`),
   KEY `currency_fk` (`currency`),
   CONSTRAINT `currency_fk` FOREIGN KEY (`currency`) REFERENCES `finance`.`currencies` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `account`
+-- Dumping data for table `accounts`
 --
 
-LOCK TABLES `account` WRITE;
-/*!40000 ALTER TABLE `account` DISABLE KEYS */;
-/*!40000 ALTER TABLE `account` ENABLE KEYS */;
+LOCK TABLES `accounts` WRITE;
+/*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+INSERT INTO `accounts` VALUES (1,'1234123412345234',1136.40,'debit','USD','2025-05-14 10:27:13'),(3,'3210012312341243',326.00,'debit','USD','2025-05-14 10:27:22');
+/*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -74,8 +76,9 @@ CREATE TABLE `users` (
   `phone` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('user','admin') DEFAULT 'user',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +87,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'u','u','u','u','user'),(2,'a','a','a','a','admin');
+INSERT INTO `users` VALUES (1,'u','u','u','u','user','2025-05-08 18:13:29'),(2,'a','a','a','a','admin','2025-05-08 18:13:29'),(3,'y','y','y','y','user','2025-05-14 09:40:35');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,31 +125,96 @@ INSERT INTO `currencies` VALUES ('EUR','Euro','€'),('GBP','British Pound','£'
 UNLOCK TABLES;
 
 --
--- Table structure for table `transaction`
+-- Table structure for table `payments`
 --
 
-DROP TABLE IF EXISTS `transaction`;
+DROP TABLE IF EXISTS `payments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `transaction` (
+CREATE TABLE `payments` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `sender_id` int NOT NULL,
-  `receiver_id` int NOT NULL,
-  `amount` decimal(4,2) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT (now()),
-  `status` varchar(255) NOT NULL,
-  `description` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `account_id` int NOT NULL,
+  `service_id` int NOT NULL,
+  `due_date` date NOT NULL,
+  `amount_due` decimal(10,2) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `payment_date` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account_due_fk` (`account_id`),
+  KEY `payments_services_id_fk` (`service_id`),
+  CONSTRAINT `account_due_fk` FOREIGN KEY (`account_id`) REFERENCES `user`.`accounts` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `payments_services_id_fk` FOREIGN KEY (`service_id`) REFERENCES `services` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `transaction`
+-- Dumping data for table `payments`
 --
 
-LOCK TABLES `transaction` WRITE;
-/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
-/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+LOCK TABLES `payments` WRITE;
+/*!40000 ALTER TABLE `payments` DISABLE KEYS */;
+INSERT INTO `payments` VALUES (2,1,1,'2025-05-16',12.00,1,'2025-05-16 13:43:51'),(3,1,2,'2025-05-16',13.00,1,'2025-05-16 13:45:37'),(4,1,3,'2025-05-16',16.00,1,'2025-05-16 13:43:51');
+/*!40000 ALTER TABLE `payments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `services`
+--
+
+DROP TABLE IF EXISTS `services`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `services` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `provider` varchar(255) NOT NULL,
+  `icon` varchar(255) NOT NULL,
+  `tariff` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `services`
+--
+
+LOCK TABLES `services` WRITE;
+/*!40000 ALTER TABLE `services` DISABLE KEYS */;
+INSERT INTO `services` VALUES (1,'Вода','ВодаКОП','bi bi-droplet',2.50),(2,'Газ','ГЗП','bi bi-fire',7.05),(3,'Світ','СЛД','bi bi-lightning',3.00);
+/*!40000 ALTER TABLE `services` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `transactions`
+--
+
+DROP TABLE IF EXISTS `transactions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transactions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `sender_id` int NOT NULL,
+  `receiver_id` int NOT NULL,
+  `amount` decimal(20,2) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT (now()),
+  `status` enum('ok','bad') DEFAULT 'ok',
+  `description` text,
+  PRIMARY KEY (`id`),
+  KEY `receiver_fk` (`receiver_id`),
+  KEY `sender_fk` (`sender_id`),
+  CONSTRAINT `receiver_fk` FOREIGN KEY (`receiver_id`) REFERENCES `user`.`accounts` (`id`) ON UPDATE CASCADE,
+  CONSTRAINT `sender_fk` FOREIGN KEY (`sender_id`) REFERENCES `user`.`accounts` (`id`) ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transactions`
+--
+
+LOCK TABLES `transactions` WRITE;
+/*!40000 ALTER TABLE `transactions` DISABLE KEYS */;
+INSERT INTO `transactions` VALUES (1,1,3,2.00,'2025-05-14 10:28:10','ok',''),(8,3,1,5.00,'2025-05-14 10:28:19','ok','');
+/*!40000 ALTER TABLE `transactions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -158,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-07  9:51:54
+-- Dump completed on 2025-05-16 13:48:23

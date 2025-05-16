@@ -116,7 +116,7 @@ export default function UserTransfer() {
     const confirmTransfer = async () => {
         const senderCard = user[0]?.number;
         const payload = {
-            card: card.replace(/\D/g, ''), // receiver card number
+            card: card.replace(/\D/g, ''),
             senderAccountNumber: senderCard?.replace(/\D/g, ''),
             amount: parseFloat(amount),
             description,

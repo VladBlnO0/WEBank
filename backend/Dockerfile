@@ -8,6 +8,7 @@ RUN npm install
 RUN npm install -g nodemon
 RUN npm install bcrypt
 RUN npm install cors async-retry
+RUN npm install node-cron
 
 RUN chown -R node:node /app
 USER node

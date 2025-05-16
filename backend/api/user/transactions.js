@@ -43,16 +43,17 @@ router.get('/transactions', (req, res) => {
 
     const sqlPayment = `
         SELECT p.id, 
-               p.amount, 
-               p.date, 
-               p.service_id, 
+               p.amount_due, 
+               p.payment_date, 
+               p.service_id,
+               p.status,
                'payment' AS type,
                s.name AS service_name
-        FROM finance.payment p
+        FROM finance.payments p
                  JOIN user.accounts a ON p.account_id = a.id
                  JOIN finance.services s ON p.service_id = s.id
-        WHERE a.number = ?
-        ORDER BY p.date DESC
+        WHERE a.number = ? AND p.status = 1
+        ORDER BY p.payment_date DESC
     `;
 
     try {
@@ -87,8 +88,8 @@ router.get('/transactions', (req, res) => {
 
                     const payment = paymentResults.map(p => ({
                         id: p.id,
-                        date: p.date,
-                        amount: -p.amount,
+                        date: p.payment_date,
+                        amount: -p.amount_due,
                         description: `Послуга #${p.service_name}`,
                         label: 'Оплата послуги',
                         type: 'payment'

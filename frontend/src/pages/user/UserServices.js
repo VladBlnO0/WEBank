@@ -269,7 +269,13 @@ export default function PaymentPage() {
                                             <i className={`${service.icon} me-2`}></i> {service.name}
                                         </td>
                                         <td>{service.provider}</td>
-                                        <td>${service.tariff}</td>
+                                        <td>$
+                                            {
+                                                payment
+                                                    ? payment.amount_due
+                                                    : "-"
+                                            }
+                                        </td>
                                         <td>
                                             {
                                                 payment

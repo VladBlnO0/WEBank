@@ -6,7 +6,6 @@ COPY package.json package-lock.json ./
 
 RUN npm install
 RUN npm install -g nodemon
-RUN npm install bcrypt
 RUN npm install cors async-retry
 RUN npm install node-cron
 

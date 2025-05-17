@@ -5,10 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 RUN npm install
-RUN npm install react-router-dom react-bootstrap bootstrap-icons
-RUN npm install chart.js react-chartjs-2 chartjs-adapter-date-fns
-RUN npm install @tinymce/tinymce-react
-RUN npm install lucide-react
+RUN npm install react-router-dom react-bootstrap bootstrap-icons chart.js react-chartjs-2 chartjs-adapter-date-fns @tinymce/tinymce-react lucide-react
 
 ENV ESLINT_NO_CACHE=true
 

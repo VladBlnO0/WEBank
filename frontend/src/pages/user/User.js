@@ -1,18 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { NavLink, Navigate, useLocation } from "react-router-dom";
 import styles from "../css/User.module.css";
-import { useAuth } from "../../contexts/AuthContext";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
 export default function UserDashboard() {
     const location = useLocation();
     const allowedFrom = [
-        "/user-transfer",
-        "/user-services",
-        "/sign-in",
-        "/sign-up",
-        "/user",
+        "/transfer",
+        "/services",
+        "/",
     ];
 
     const [showCardNumberTooltip, setShowCardNumberTooltip] = useState(false);
@@ -47,8 +44,6 @@ export default function UserDashboard() {
     }, []);
 
     const cameFrom = location.state?.from;
-
-    const { logout } = useAuth();
 
     const formatCard = (value) => {
         return value
@@ -97,13 +92,6 @@ export default function UserDashboard() {
                             <i className="bi bi-credit-card me-2"></i> Послуги
                         </NavLink>
                     </nav>
-                    <NavLink
-                        to="/"
-                        onClick={logout}
-                        className="btn btn-outline-dark m-3 text-center"
-                    >
-                        Вийти
-                    </NavLink>
                 </aside>
 
                 <main className="flex-grow-1 p-4">

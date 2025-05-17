@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Navigate, NavLink, useLocation } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthContext";
 import styles from "../css/User.module.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,9 +10,11 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 export default function PaymentPage() {
 
     const location = useLocation();
-    const allowedFrom = ["/user-transfer", "/user-services", "/user"];
+    const allowedFrom = [
+        "/transfer",
+        "/services",
+        "/"];
     const cameFrom = location.state?.from;
-    const { logout } = useAuth();
 
     const [services, setServices] = useState([]);
     const [selected, setSelected] = useState([]);
@@ -168,13 +169,6 @@ export default function PaymentPage() {
                             <i className="bi bi-credit-card me-2"></i> Послуги
                         </NavLink>
                     </nav>
-                    <NavLink
-                        to="/"
-                        onClick={logout}
-                        className="btn btn-outline-dark m-3 text-center"
-                    >
-                        Вийти
-                    </NavLink>
                 </aside>
 
                 <main className="flex-grow-1 p-4">

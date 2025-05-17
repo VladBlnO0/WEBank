@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { NavLink, Navigate, useLocation } from "react-router-dom";
 import styles from "../css/User.module.css";
-import { useAuth } from "../../contexts/AuthContext";
 import { useState } from "react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,9 +11,11 @@ const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
 export default function UserTransfer() {
     const location = useLocation();
-    const allowedFrom = ["/user", "/user-services", "/user-transfer"];
+    const allowedFrom = [
+        "/",
+        "/services",
+        "/transfer"];
     const cameFrom = location.state?.from;
-    const { logout } = useAuth();
 
     const [card, setCard] = useState("");
     const [amount, setAmount] = useState("");
@@ -192,13 +193,6 @@ export default function UserTransfer() {
                             <i className="bi bi-credit-card me-2"></i> Послуги
                         </NavLink>
                     </nav>
-                    <NavLink
-                        to="/"
-                        onClick={logout}
-                        className="btn btn-outline-dark m-3 text-center"
-                    >
-                        Вийти
-                    </NavLink>
                 </aside>
 
                 <main className="flex-grow-1 p-4 d-flex justify-content-center align-items-center">

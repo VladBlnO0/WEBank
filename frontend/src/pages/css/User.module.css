@@ -190,8 +190,10 @@ h1 {
     height: 45px;
     background: #ffffff;
     color: gray;
+    bottom: 0;
+    position: fixed;
+    margin-bottom: auto;
 }
-
 .card_icon {
     position: absolute;
     top: 20px;

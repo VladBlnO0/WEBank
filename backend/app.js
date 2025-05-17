@@ -4,7 +4,6 @@ const cors = require('cors');
 const path = require('path');
 
 const transRoute = require(path.join(__dirname, 'api', 'finance', 'transactions'));
-const userRoute = require(path.join(__dirname, 'api', 'users'));
 const senRoute = require(path.join(__dirname, 'api', 'finance', 'senders'));
 const recRoute = require(path.join(__dirname, 'api', 'finance', 'receivers'));
 
@@ -23,7 +22,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use('/api/finance/transactions', transRoute);
-app.use('/api/users', userRoute);
 app.use('/api/finance/transactions', senRoute);
 app.use('/api/finance/transactions', recRoute);
 

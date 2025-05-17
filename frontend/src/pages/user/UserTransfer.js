@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { NavLink, Navigate, useLocation } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import styles from "../css/User.module.css";
 import { useState } from "react";
 
@@ -10,12 +10,6 @@ import { Modal, Button, Toast, ToastContainer} from 'react-bootstrap';
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
 export default function UserTransfer() {
-    const location = useLocation();
-    const allowedFrom = [
-        "/",
-        "/services",
-        "/transfer"];
-    const cameFrom = location.state?.from;
 
     const [card, setCard] = useState("");
     const [amount, setAmount] = useState("");
@@ -39,10 +33,6 @@ export default function UserTransfer() {
 
     const userBalance = parseFloat(user[0]?.balance ?? 0);
     const newBalance = userBalance - parseFloat(amount);
-
-    if (!allowedFrom.includes(cameFrom)) {
-        return <Navigate to="/404" replace />;
-    }
 
     const formatCard = (value) => {
         return value
@@ -172,22 +162,19 @@ export default function UserTransfer() {
                     </div>
                     <nav className="d-flex flex-column p-2 gap-2">
                         <NavLink
-                            to="/user"
-                            state={{ from: "/user-transfer" }}
+                            to="/"
                             className="btn btn-light text-start d-flex align-items-center"
                         >
                             <i className="bi bi-wallet2 me-2"></i> Мій рахунок
                         </NavLink>
                         <NavLink
-                            to="/user-transfer"
-                            state={{ from: "/user-transfer" }}
+                            to="/transfer"
                             className="btn btn-light text-start d-flex align-items-center active"
                         >
                             <i className="bi bi-arrow-repeat me-2"></i> Перекази
                         </NavLink>
                         <NavLink
-                            to="/user-services"
-                            state={{ from: "/user-transfer" }}
+                            to="/services"
                             className="btn btn-light text-start d-flex align-items-center"
                         >
                             <i className="bi bi-credit-card me-2"></i> Послуги

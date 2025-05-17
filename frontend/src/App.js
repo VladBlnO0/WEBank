@@ -1,6 +1,5 @@
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
-import NoPage from './pages/etc/NoPage'
 
 import User from './pages/user/User'
 import UserTransfer from './pages/user/UserTransfer'
@@ -13,8 +12,6 @@ function App() {
         <div>
             <Router>
                 <Routes>
-                    <Route path="/404" element={<NoPage />} />
-
                     <Route path="/" element={<User />} />
                     <Route path="/transfer" element={<UserTransfer />} />
                     <Route path="/services" element={<UserServices />} />

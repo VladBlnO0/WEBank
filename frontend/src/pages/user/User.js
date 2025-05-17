@@ -1,16 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { NavLink, Navigate, useLocation } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import styles from "../css/User.module.css";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
 export default function UserDashboard() {
-    const location = useLocation();
-    const allowedFrom = [
-        "/transfer",
-        "/services",
-        "/",
-    ];
 
     const [showCardNumberTooltip, setShowCardNumberTooltip] = useState(false);
     const hoverTimeout = useRef(null);
@@ -43,18 +37,12 @@ export default function UserDashboard() {
             .then((data) => setTransactions(data.transactions));
     }, []);
 
-    const cameFrom = location.state?.from;
-
     const formatCard = (value) => {
         return value
             .replace(/\D/g, '')
             .replace(/(.{4})/g, '$1 ')
             .trim();
     };
-
-    if (!allowedFrom.includes(cameFrom)) {
-        return <Navigate to="/404" replace />;
-    }
 
     return (
         <div
@@ -71,22 +59,19 @@ export default function UserDashboard() {
                     </div>
                     <nav className="d-flex flex-column p-2 gap-2">
                         <NavLink
-                            to="/user"
-                            state={{ from: "/user" }}
+                            to="/"
                             className="btn btn-light text-start d-flex align-items-center"
                         >
                             <i className="bi bi-wallet2 me-2"></i> Мій рахунок
                         </NavLink>
                         <NavLink
-                            to="/user-transfer"
-                            state={{ from: "/user" }}
+                            to="/transfer"
                             className="btn btn-light text-start d-flex align-items-center"
                         >
                             <i className="bi bi-arrow-repeat me-2"></i> Перекази
                         </NavLink>
                         <NavLink
-                            to="/user-services"
-                            state={{ from: "/user" }}
+                            to="/services"
                             className="btn btn-light text-start d-flex align-items-center"
                         >
                             <i className="bi bi-credit-card me-2"></i> Послуги

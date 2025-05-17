@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, NavLink, useLocation } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import styles from "../css/User.module.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,13 +8,6 @@ import { Button, Modal, Toast, ToastContainer } from 'react-bootstrap'
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";
 
 export default function PaymentPage() {
-
-    const location = useLocation();
-    const allowedFrom = [
-        "/transfer",
-        "/services",
-        "/"];
-    const cameFrom = location.state?.from;
 
     const [services, setServices] = useState([]);
     const [selected, setSelected] = useState([]);
@@ -47,10 +40,6 @@ export default function PaymentPage() {
     }, []);
 
     const userBalance = parseFloat(user[0]?.balance ?? 0);
-
-    if (!allowedFrom.includes(cameFrom)) {
-        return <Navigate to="/404" replace />;
-    }
 
     const toggleService = (id) => {
         setSelected((prev) =>
@@ -148,22 +137,20 @@ export default function PaymentPage() {
                     </div>
                     <nav className="d-flex flex-column p-2 gap-2">
                         <NavLink
-                            to="/user"
-                            state={{ from: "/user-services" }}
+                            to="/"
                             className="btn btn-light text-start d-flex align-items-center"
                         >
                             <i className="bi bi-wallet2 me-2"></i> Мій рахунок
                         </NavLink>
                         <NavLink
-                            to="/user-transfer"
+                            to="/transfer"
                             state={{ from: "/user-services" }}
                             className="btn btn-light text-start d-flex align-items-center"
                         >
                             <i className="bi bi-arrow-repeat me-2"></i> Перекази
                         </NavLink>
                         <NavLink
-                            to="/user-services"
-                            state={{ from: "/user-services" }}
+                            to="/services"
                             className="btn btn-light text-start d-flex align-items-center active"
                         >
                             <i className="bi bi-credit-card me-2"></i> Послуги
@@ -263,7 +250,13 @@ export default function PaymentPage() {
                                             <i className={`${service.icon} me-2`}></i> {service.name}
                                         </td>
                                         <td>{service.provider}</td>
-                                        <td>${service.tariff}</td>
+                                        <td>$
+                                            {
+                                                payment
+                                                    ? payment.amount_due
+                                                    : "-"
+                                            }
+                                        </td>
                                         <td>
                                             {
                                                 payment

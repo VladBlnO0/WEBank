@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "../css/User.module.css";
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:4000";

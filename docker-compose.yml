@@ -5,14 +5,18 @@ services:
     container_name: web_frontend
     ports:
       - '3000:3000'
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
+
+#    Live Reload
+#    volumes:
+#      - ./frontend:/app
+#      - /app/node_modules
+
     stdin_open: true
     tty: true
     environment:
       - CHOKIDAR_USEPOLLING=true
       - REACT_APP_API_URL=http://localhost:4000
+      - NODE_OPTIONS=--openssl-legacy-provider
     depends_on:
       - backend
   backend:
@@ -22,9 +26,12 @@ services:
     container_name: web_backend
     ports:
       - '4000:4000'
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
+
+#    Live Reload
+#    volumes:
+#      - ./backend:/app
+#      - /app/node_modules
+
     environment:
       - MYSQL_HOST=db
       - MYSQL_USER=root
@@ -43,7 +50,7 @@ services:
       - '3306:3306'
     volumes:
       - ./mysql_data:/var/lib/mysql
-      - ./db-dumps:/dumps
+      - ./db-dumps:/docker-entrypoint-initdb.d/
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s

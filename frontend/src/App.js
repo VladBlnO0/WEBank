@@ -1,11 +1,12 @@
+import React from 'react';
+
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
+import User from './pages/user/User';
+import UserTransfer from './pages/user/UserTransfer';
+import UserServices from './pages/user/UserServices';
 
-import User from './pages/user/User'
-import UserTransfer from './pages/user/UserTransfer'
-import UserServices from './pages/user/UserServices'
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
     return (
@@ -18,7 +19,7 @@ function App() {
                 </Routes>
             </Router>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;

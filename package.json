@@ -1,0 +1,21 @@
+{
+  "name": "website-dev-docker",
+  "version": "1.0.0",
+  "description": "This course project is dedicated to creating a software application to optimize the activities of a banking enterprise. The main task is to develop a web application with a graphical interface that interacts with a database to store, update, and process the  necessary information, as well as execute various queries.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VladBlnO0/WebBank.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/VladBlnO0/WebBank/issues"
+  },
+  "homepage": "https://github.com/VladBlnO0/WebBank#readme"
+}

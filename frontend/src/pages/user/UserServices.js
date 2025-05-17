@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "../css/User.module.css";
 
 import 'bootstrap/dist/css/bootstrap.min.css';

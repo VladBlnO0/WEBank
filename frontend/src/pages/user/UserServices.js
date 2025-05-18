@@ -216,22 +216,22 @@ export default function PaymentPage() {
                             {services.map((service) => {
                                 const payment = payments.find((p) => p.service_id === service.id);
 
-                                let status = "Pending";
+                                let status = "В очікуванні";
                                 let badgeClass = "bg-secondary";
 
                                 if (payment) {
                                     if (payment.status) {
-                                        status = "Paid";
+                                        status = "Оплачено";
                                         badgeClass = "bg-success";
 
                                     } else {
                                         const due = new Date(payment.due_date);
                                         const today = new Date();
                                         if (due < today) {
-                                            status = "Overdue";
+                                            status = "Прострочено";
                                             badgeClass = "bg-danger";
                                         } else {
-                                            status = "Pending";
+                                            status = "В очікуванні";
                                             badgeClass = "bg-warning";
                                         }
                                     }
@@ -287,7 +287,7 @@ export default function PaymentPage() {
                         <div className="border-top my-3"></div>
 
                         <button onClick={handleSubmit} className="btn btn-dark w-100">
-                            Перейти до оплати <i className="bi bi-arrow-right ms-2"></i>
+                            Оплатити <i className="bi bi-arrow-right ms-2"></i>
                         </button>
                     </div>
                 </main>

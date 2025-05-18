@@ -1,7 +1,0 @@
-// TODO need to think about cutting unused libraries
-// TODO from "Pending" to "Paid"
-
-// TODO add services status and due data
-
-// TODO add check for card receiver
-// TODO add toast for success or bad transfer

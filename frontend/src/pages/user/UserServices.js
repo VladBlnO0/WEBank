@@ -294,19 +294,19 @@ export default function PaymentPage() {
                     </div>
 
                     <div className="card p-4">
-                        <h5 className="mb-3">Payment Summary</h5>
+                        <h5 className="mb-3">Підсумок платежу</h5>
                         <div className="d-flex justify-content-between">
-                            <span>Selected Services:</span>
+                            <span>Вибрані послуги:</span>
                             <span>{selected.length}</span>
                         </div>
                         <div className="d-flex justify-content-between">
-                            <span>Total Amount:</span>
+                            <span>Загальна сума:</span>
                             <span>${total}</span>
                         </div>
                         <div className="border-top my-3"></div>
 
                         <button onClick={handleSubmit} className="btn btn-dark w-100">
-                            Proceed to Payment <i className="bi bi-arrow-right ms-2"></i>
+                            Перейти до оплати <i className="bi bi-arrow-right ms-2"></i>
                         </button>
                     </div>
                 </main>

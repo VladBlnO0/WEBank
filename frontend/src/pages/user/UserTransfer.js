@@ -252,7 +252,7 @@ export default function UserTransfer() {
                                 />
                                 {showCardTooltip && (
                                     <div className="position-absolute top-100 mt-1 bg-light border p-2 rounded shadow-sm small">
-                                        Please enter your card number (16 digits)
+                                        Будь ласка, введіть номер вашої картки (16 цифр)
                                     </div>
                                 )}
                                 <span className="input-group-text">
@@ -286,7 +286,7 @@ export default function UserTransfer() {
                                 />
                                 {showAmountTooltip && (
                                     <div className="position-absolute top-100 mt-1 bg-light border p-2 rounded shadow-sm small">
-                                        Please enter amount you wish to send
+                                        Будь ласка, введіть суму, яку ви хочете надіслати
                                     </div>
                                 )}
                             </div>
@@ -296,7 +296,7 @@ export default function UserTransfer() {
                             <label className="form-label">Опис</label>
                             <textarea
                                 className={styles.transfer_form}
-                                placeholder="What's this transfer for?"
+                                placeholder="Для чого цей переказ?"
                                 rows="3"
                                 maxLength="40"
                                 value={description}

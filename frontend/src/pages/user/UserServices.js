@@ -252,9 +252,7 @@ export default function PaymentPage() {
                                         <td>{service.provider}</td>
                                         <td>$
                                             {
-                                                payment
-                                                    ? payment.amount_due
-                                                    : "-"
+                                                service ? service.tariff : "-"
                                             }
                                         </td>
                                         <td>

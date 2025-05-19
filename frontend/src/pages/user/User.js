@@ -131,9 +131,9 @@ export default function UserDashboard() {
                                             <div className="fw-medium">
                                                 {tx.label}
                                                 <span className={`badge ms-2 text-uppercase ${
-                                                        tx.type === 'sent'
+                                                        tx.type === 'Надіслано'
                                                             ? 'bg-danger'
-                                                            : tx.type === 'received'
+                                                            : tx.type === 'Отримано'
                                                                 ? 'bg-success'
                                                                 : 'bg-primary'
                                                     }`}>

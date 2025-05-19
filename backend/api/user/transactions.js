@@ -17,7 +17,7 @@ router.get('/transactions', (req, res) => {
                t.date,
                t.description,
                r.number AS receiver_number,
-               'sent' AS type
+               'Надіслано' AS type
         FROM finance.transactions t
                  JOIN user.accounts a ON t.sender_id = a.id
                  JOIN user.accounts r ON t.receiver_id = r.id
@@ -32,7 +32,7 @@ router.get('/transactions', (req, res) => {
                t.amount, 
                t.date,
                t.description,
-               'received' AS type,
+               'Отримано' AS type,
                s.number AS sender_number
         FROM finance.transactions t
                  JOIN user.accounts a ON t.receiver_id = a.id
@@ -47,7 +47,7 @@ router.get('/transactions', (req, res) => {
                p.payment_date, 
                p.service_id,
                p.status,
-               'payment' AS type,
+               'Оплата' AS type,
                s.name AS service_name
         FROM finance.payments p
                  JOIN user.accounts a ON p.account_id = a.id
@@ -73,7 +73,7 @@ router.get('/transactions', (req, res) => {
                         description: tx.description || '',
                         status: `На картку ****${tx.receiver_number?.slice(-4)}`,
                         label: 'Переказ на картку',
-                        type: 'sent'
+                        type: 'Надіслано'
                     }));
 
                     const received = receiveResults.map(tx => ({
@@ -83,7 +83,7 @@ router.get('/transactions', (req, res) => {
                         description: tx.description || '',
                         status: `З картки ****${tx.sender_number?.slice(-4)}`,
                         label: 'Отримано з картки',
-                        type: 'received'
+                        type: 'Отримано'
                     }));
 
                     const payment = paymentResults.map(p => ({
@@ -92,7 +92,7 @@ router.get('/transactions', (req, res) => {
                         amount: -p.amount_due,
                         description: `Послуга #${p.service_name}`,
                         label: 'Оплата послуги',
-                        type: 'payment'
+                        type: 'Оплата'
                     }));
 
                     const combined = [...send, ...received, ...payment]

@@ -9,8 +9,8 @@ RUN npm install
 
 ENV ESLINT_NO_CACHE=true
 
-RUN chown -R node:node /app/node_modules
-USER node
+#RUN chown -R node:node /app/node_modules
+#USER node
 
 COPY . .
 

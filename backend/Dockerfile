@@ -7,8 +7,8 @@ COPY package.json package-lock.json ./
 RUN npm install
 #RUN npm install -g nodemon cors async-retry node-cron
 
-RUN chown -R node:node /app
-USER node
+#RUN chown -R node:node /app
+#USER node
 
 COPY . .
 

@@ -58,7 +58,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (1,'1234123412345234',1133.90,'debit','USD','2025-05-14 10:27:13'),(3,'3210012312341243',326.00,'debit','USD','2025-05-14 10:27:22');
+INSERT INTO `accounts` VALUES (1,'1234123412345234',1110.85,'debit','USD','2025-05-14 10:27:13'),(3,'3210012312341243',336.00,'debit','USD','2025-05-14 10:27:22');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +180,7 @@ CREATE TABLE `services` (
 
 LOCK TABLES `services` WRITE;
 /*!40000 ALTER TABLE `services` DISABLE KEYS */;
-INSERT INTO `services` VALUES (1,'Вода','ВодаКОП','bi bi-droplet',2.50),(2,'Газ','ГЗП','bi bi-fire',7.05),(3,'Світ','СЛД','bi bi-lightning',3.00);
+INSERT INTO `services` VALUES (1,'Вода','ВК','bi bi-droplet',2.50),(2,'Газ','КТЕ','bi bi-fire',7.05),(3,'Електроенергія','ГЗП','bi bi-lightning',3.00);
 /*!40000 ALTER TABLE `services` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +204,7 @@ CREATE TABLE `transactions` (
   KEY `sender_fk` (`sender_id`),
   CONSTRAINT `receiver_fk` FOREIGN KEY (`receiver_id`) REFERENCES `user`.`accounts` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `sender_fk` FOREIGN KEY (`sender_id`) REFERENCES `user`.`accounts` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,4 +226,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-17 13:17:09
+-- Dump completed on 2025-05-18 15:11:30

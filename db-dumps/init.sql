@@ -24,6 +24,40 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `bankdb` /*!40100 DEFAULT CHARACTER SET
 USE `bankdb`;
 
 --
+-- Current Database: `admin`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `admin` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+USE `admin`;
+
+--
+-- Table structure for table `page`
+--
+
+DROP TABLE IF EXISTS `page`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `page` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `section_key` varchar(50) NOT NULL,
+  `content` text NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `page_section_key_uindex` (`section_key`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `page`
+--
+
+LOCK TABLES `page` WRITE;
+/*!40000 ALTER TABLE `page` DISABLE KEYS */;
+INSERT INTO `page` VALUES (2,'intro','<p>Ми прагнемо допомогти вам досягти ваших фінансових цілей</p>'),(3,'services','<ul><li>Перегляд свого рахунку</li><li>Переказ коштів на картку</li><li>Оплата послуг</li></ul>'),(4,'contact','<p>Пошта: gmail@WEBank.com</p>\n<p>Телефон: +(839) 447-2387</p>');
+/*!40000 ALTER TABLE `page` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Current Database: `user`
 --
 
@@ -58,7 +92,7 @@ CREATE TABLE `accounts` (
 
 LOCK TABLES `accounts` WRITE;
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` VALUES (1,'1234123412345234',1110.85,'debit','USD','2025-05-14 10:27:13'),(3,'3210012312341243',336.00,'debit','USD','2025-05-14 10:27:22');
+INSERT INTO `accounts` VALUES (1,'1234123412345234',1007.85,'debit','USD','2025-05-14 10:27:13'),(3,'3210012312341243',436.00,'debit','USD','2025-05-14 10:27:22');
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +187,7 @@ CREATE TABLE `payments` (
 
 LOCK TABLES `payments` WRITE;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-INSERT INTO `payments` VALUES (2,1,1,'2025-05-16',5.00,1,'2025-05-17 11:46:13'),(3,1,2,'2025-05-16',5.00,0,NULL),(4,1,3,'2025-05-16',5.00,0,NULL);
+INSERT INTO `payments` VALUES (2,1,1,'2025-05-16',2.50,1,'2025-05-17 11:46:13'),(3,1,2,'2025-05-16',7.05,0,NULL),(4,1,3,'2025-05-16',3.00,0,NULL);
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +238,7 @@ CREATE TABLE `transactions` (
   KEY `sender_fk` (`sender_id`),
   CONSTRAINT `receiver_fk` FOREIGN KEY (`receiver_id`) REFERENCES `user`.`accounts` (`id`) ON UPDATE CASCADE,
   CONSTRAINT `sender_fk` FOREIGN KEY (`sender_id`) REFERENCES `user`.`accounts` (`id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -226,4 +260,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-05-18 15:11:30
+-- Dump completed on 2025-05-28 11:10:01
